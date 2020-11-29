@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+      
+  Everything you need to know before master Emacs &ndash; KeepCoding
+
+    </title>
+    
+    
+    <meta name="description" property="og:description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &amp;#34;skilled&amp;#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.|Jiacai&#39;s blog">
+    
+
+    <meta name="apple-mobile-web-app-title" content="KeepCoding">
+    
+    
+    <link rel="icon" href="/favicon-64.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
+    
+    
+    
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@liujiacai">
+    <meta name="twitter:creator" content="@liujiacai">
+    <meta name="twitter:title" content="Everything you need to know before master Emacs | KeepCoding">
+    <meta name="twitter:description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &#34;skilled&#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.|Jiacai&#39;s blog">
+    <meta name="twitter:image" content="https://en.liujiacai.net/twitter-card.png">
+    
+
+
+    <link rel="stylesheet" href="/assets/syntax.css">
+    <link rel="stylesheet" href="/assets/primer-build.css">
+    <link rel="stylesheet" href="/assets/style.css">
+    <link rel="stylesheet" href="/assets/custom_style.css">
+  </head>
+
+
+  <body class="bg-gray">
+    <div id="holy" class="container-lg bg-white h-100">
+
+      <div id="header" class="px-1 bg-white">
+        <nav class="UnderlineNav UnderlineNav--right px-2">
+  <a class="UnderlineNav-actions muted-link h2" href="https://en.liujiacai.net/">
+    KeepCoding
+  </a>
+
+  
+  
+  <div class="UnderlineNav-body">
+    
+    
+    
+    <a class="UnderlineNav-item" href="/about">
+      
+      <span>About</span>
+    </a>
+    
+    
+  </div>
+  
+</nav>
+
+      </div>
+
+      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
+        
+
+<div class="Subhead">
+  <div class="Subhead-heading">
+    <div class="h1 mt-3 mb-1">Everything you need to know before master Emacs</div>
+  </div>
+  <div class="Subhead-description">
+    
+
+
+
+
+<a href='/tags/emacs' class="muted-link">
+  <span class="Label Label--gray">emacs</span>
+</a>
+
+
+
+    
+    <div class="float-md-right">
+      <span title="Lastmod: 2020-11-29. Published at: 2020-11-29.">
+        
+          Lastmod: 2020-11-29
+        
+      </span>
+    </div>
+    
+  </div>
+</div>
+<article>
+  
+  <section class="pb-6 mb-3 border-bottom">
+    
+<p>
+When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly <a href="https://www.zdnet.com/article/the-10-oldest-significant-open-source-programs/">forty years</a> . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &#34;skilled&#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.</p>
+<p>
+This article will be divided into two parts to introduce how to get started with Emacs.</p>
+<ol>
+<li>
+<p>The first part will introduce the core concept. I think the reason why many beginners give up after simply trying Emacs is that they don’t understand its design concept. Emacs is so unique that there are a lot of discomforts when migrate from traditional editors.</p>
+<p>
+By understanding its concept, readers can judge whether Emacs is in line with their own taste and whether it is worth the effort to master it.</p>
+</li>
+<li>
+<p>The second part will give some specific suggestions to beginners who want to get started with Emacs based on my more than four years of experience. I will also introduce some extensions that I use daily. Many users choose Emacs because of a certain function of one of the extension. I often amaze the power of Emacs because of the advanced usage of some entension.</p>
+</li>
+</ol>
+<p>Although this article will use ELisp as an example, readers do not need to learn ELisp and basic programming skills is enough. Secondly, this article compares the features of Emacs with the more popular VSCode editor, and it is also valid to change to other editors.</p>
+<blockquote>
+<p>Emacs is Emacs VSCode / Vim / Sublime … is yet just another editor —- <a href="https://news.ycombinator.com/item?id=18400204">Source</a></p>
+</blockquote>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i4/581166664/O1CN0156nQHc1z6A1VldH2x_!!581166664.png" alt="https://img.alicdn.com/imgextra/i4/581166664/O1CN0156nQHc1z6A1VldH2x_!!581166664.png" title="https://img.alicdn.com/imgextra/i4/581166664/O1CN0156nQHc1z6A1VldH2x_!!581166664.png" /><figcaption>
+Learning curves of different editors
+</figcaption>
+</figure>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Core concept
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>The official <a href="https://www.gnu.org/software/emacs/">GNU Emacs</a> website introduces this:</p>
+<blockquote>
+<p>An extensible, customizable, free/libre text editor — and more.</p>
+</blockquote>
+<p>The first part is fairly straightforward, as for the <code class="verbatim">more</code> part, the benevolent sees benevolence, and the wise see wisdom. It was once joked that Emacs was an operating system disguised as an editor. This section will unveil the mystery of Emacs.</p>
+<div id="outline-container-headline-2" class="outline-3">
+<h3 id="headline-2">
+Text editor
+</h3>
+<div id="outline-text-headline-2" class="outline-text-3">
+<p>No matter how Emacs fans deify it, first Emacs is a text editor, and then the others. Unlike VSCode, Emacs is designed for pure keyboard operation, and the similar editor is only Vi. The operation of the pure keyboard ensures higher efficient. At the same time, this has become a barrier for beginners to get started, and it takes some time to adapt.</p>
+<p>
+As far as text editing is concerned, Emacs provides a lot of thoughtful functions. Here are two things:</p>
+<div id="outline-container-headline-3" class="outline-4">
+<h4 id="headline-3">
+Backup
+</h4>
+<div id="outline-text-headline-3" class="outline-text-4">
+<p>As a mature programmer, you need to be aware of backups at all times. After all, mistakes are inevitable. In Emacs, there are mainly two backup methods, called <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html">static backup</a> and <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Auto_002dSaving.html#Auto_002dSaving">auto saving</a> here.</p>
+<ul>
+<li>
+<p>Static backup occurs when you first open the file, the end of the backup file name has <code class="verbatim">~</code> labeled; and support multiple versions of backup</p>
+</li>
+<li>
+<p>Automatic backup As the name suggests, periodically save the current file being edited, the file name of the head and tail have <code class="verbatim">#</code> marked. When saving, the automatically backed up files will be deleted, and when Emacs crashes due to unexpected reasons (such as a crash), the files will be retained, and you can use the <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Recover.html">recover-this-file</a> command to restore.</p>
+</li>
+</ul>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Statically backed up files
+!Users!liujiacai!.emacs.d!README.org.~ 1 ~
+!Users!liujiacai!.emacs.d!README.org.~ 2 ~
+!Users!liujiacai!.emacs.d!customizations! editing.el.~ 1 ~*
+!Users!liujiacai!.emacs.d!customizations!editing.el.~ 44 ~*
+!Users!liujiacai!.emacs.d!customizations!editing.el.~ 45 ~*
+!Users !liujiacai!.emacs.d!customizations!editing.el.~ 46 ~*
+!Users!liujiacai!.emacs.d!customizations!editing.el.~ 47 ~*
+!Users!liujiacai!.emacs.d!customizations! editing.el.~ 48 ~*
+
+Automatically backed up files
+#!Users!liujiacai!.emacs.d!customizations!misc.org#
+#!Users!liujiacai!.emacs.d!customizations!navigation.el#*
+#!Users!liujiacai!.emacs.d! elpa!lsp-java- 20201105.1758 !lsp-java.el#
+#!Users!liujiacai!.emacs.d!init.el#</code></pre></div>
+</div>
+<p>The above is part of the backup file in my computer. Thanks to these two functions, I have been rescued from the edge of a crash many times. As far as I know, no editor has such intimate features.</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-4">
+<h4 id="headline-4">
+Undo/Redo
+</h4>
+<div id="outline-text-headline-4" class="outline-text-4">
+<p>When editing the file, <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html">undo</a> and redo is a very basic, important feature. In conventional editor operations are linear, whereas in Emacs, it is a tree, I will illustrate the difference between the two using state diagram below</p>
+<ul>
+<li>
+<p>First, enter three characters <code class="verbatim">a b c</code>, and we come to <code class="verbatim">current buffer state</code></p>
+</li>
+</ul>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
+;;                                |
+;;                                |
+;;                                o  (first edit)
+;;                                |
+;;                                |
+;;                                o  (second edit)
+;;                                |
+;;                                |
+;;                                x  (current buffer state)</code></pre></div>
+</div>
+<ul>
+<li>
+<p>Then undo of two steps back to first edit state (only a is left), conventional editor will have state as</p>
+</li>
+</ul>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
+;;                                |
+;;                                |
+;;                                x  (current buffer state)
+;;                                |
+;;                                |
+;;                                o
+;;                                |
+;;                                |
+;;                                o</code></pre></div>
+</div>
+<p>However, Emacs is not the case, its status is</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
+;;                                |
+;;                                |
+;;                                o  (first edit)
+;;                                |
+;;                                |
+;;                                o  (second edit)
+;;                                |
+;;                                |
+;;                                x  (buffer state before undo)
+;;                                |
+;;                                |
+;;                                o  (first undo)
+;;                                |
+;;                                |
+;;                                x  (second undo)</code></pre></div>
+</div>
+<p>The state is append-only, and a undo means returning to the last state, so the following state diagram may be more appropriate:</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;        (initial buffer state)  o
+;;                                |
+;;                                |
+;;                  (first edit)  o  x  (second undo)
+;;                                |  |
+;;                                |  |
+;;                 (second edit)  o  o  (first undo)
+;;                                | /
+;;                                |/
+;;                                o  (buffer state before undo)</code></pre></div>
+</div>
+<ul>
+<li>
+<p>At this point, if you perform a new insertion (such as <code class="verbatim">d</code>), although the characters on the text are the same, simply <code class="verbatim">a d</code>, the state diagrams of editors are different, as shown below:</p>
+</li>
+</ul>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;            Undo/Redo:                      Emacs&#39; undo
+;;
+;;               o                                o
+;;               |                                |
+;;               |                                |
+;;               o                                o  o
+;;               .\                               |  |\
+;;               . \                              |  | \
+;;               .  x  (new edit)                 o  o  |
+;;   (discarded  .                                | /   |
+;;     branch)   .                                |/    |
+;;               .                                o     |
+;;                                                      |
+;;                                                      |
+;;                                                      x  (new edit)</code></pre></div>
+</div>
+<ul>
+<li>
+<p>At this point, if we undo twice, conventional editor returns to initial state (no characters), but Emacs restore to second state (there are <code class="verbatim">a b</code> there).</p>
+</li>
+</ul>
+<p>It is very confusing when I first encountered the undo and redo in Emacs, but fortunately there is an extension called <a href="https://www.emacswiki.org/emacs/UndoTree">Undo Tree</a> to visualize the undo state. The state diagram above is taken from its comments, thanks contributions of its authors.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Expansion and customization
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<blockquote>
+<p>At its core is an interpreter for Emacs Lisp, a dialect of the Lisp programming language with
+extensions to support text editing.</p>
+</blockquote>
+<p>
+The above section introduced two very useful basic functions in text editing. In fact, this is just the tip of the iceberg. Emacs&#39;s extensible and customizable features create a creative community with countless powerful extensions. Readers may wonder, VSCode also has a rich extension market , so how is Emacs different from them? This is related to the Emacs <a href="https://www.gnu.org/software/emacs/emacs-paper.html#SEC14">design architecture</a>.</p>
+<p>
+Emacs itself can be regarded as a virtual machine(Lisp Machine). Except for the IO operations that interact with the operating system, which is implemented in C language, the rest are implemented by ELisp, and an interpreter is provided to run these ELisp codes.
+Each character input is equivalent to calling the <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Commands-for-Insertion.html">self-insert-command</a> command in the REPL of the interpreter , which means that the code defined by the user is equal to the Emacs source code (ELisp part).</p>
+<p>
+If the reader is not familiar with Lisp, so to analogy, open Emacs corresponds to type <code class="verbatim">python</code> in terminal, keyboard input, mouse click corresponds are all function call.</p>
+<p>
+One of the advantages of Lisp REPL is that it can dynamically change the internal state of the program. For example, if a variable such as <code class="verbatim">foo</code> is defined in Emacs source code, the function written by the user can directly modify it. For those who do not know Lisp, this is very incredible thing, but it is.</p>
+<p>
+This advantage of dynamically change state of running program is easy to extend, such as</p>
+<div class="src src-emacs">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs" data-lang="emacs">(defun my/google-search ()
+  <span style="color:#e6db74">&#34;Googles a query or region if any.&#34;</span>
+  (interactive)
+  (browse-url
+   (<span style="color:#a6e22e">concat</span>
+    <span style="color:#e6db74">&#34;http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=&#34;</span>
+    (if mark-active
+        (<span style="color:#a6e22e">buffer-substring</span> (<span style="color:#a6e22e">region-beginning</span>) (<span style="color:#a6e22e">region-end</span>))
+      (<span style="color:#a6e22e">read-string</span> <span style="color:#e6db74">&#34;Google: &#34;</span>)))))</code></pre></div>
+</div>
+<p>Put the few lines of code above to <code class="verbatim">init.el</code>, We add a useful function to open a browser in Emacs, and do google search.</p>
+<p>
+In VSCode, even a Hello World level extension, the steps are much more complicated, concrete step please refer to:</p>
+<ul>
+<li>
+<p><a href="https://code.visualstudio.com/api/get-started/your-first-extension">https://code.visualstudio.com/api/get-started/your-first-extension</a></p>
+</li>
+</ul>
+<p>In addition to the ease of extension, another advantage of ELisp REPL is that it is highly customizable. In addition to the C language part of the implementation, the rest of the ELisp implementation can be all modified. For example, the picture below is the Emacs standard interface</p>
+<p>
+<img src="https://www.gnu.org/software/emacs/images/teaser.png" alt="https://www.gnu.org/software/emacs/images/teaser.png" title="https://www.gnu.org/software/emacs/images/teaser.png" /></p>
+<p>
+Most Emacs users hide the menu bar with such a line of code <code>(menu-bar-mode -1)</code>, because menu is basically not used and takes up space. In addition, Emacs can also be used to <a href="https://www.emacswiki.org/emacs/MusicPlayers">listen to music</a> , <a href="https://www.emacswiki.org/emacs/CategoryGames">play games</a> , <a href="https://depp.brause.cc/nov.el/">read EPUB e-books</a> , <a href="https://github.com/zevlg/telega.el">chat Telegram</a> , and even <a href="https://github.com/manateelazycat/emacs-application-framework">any application</a> can run in Emacs!</p>
+<blockquote>
+<p>Emacs, “a great operating system, lacking only a decent editor”</p>
+</blockquote>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i2/581166664/O1CN01ePMFmU1z6A1W5J6a4_!!581166664.png" alt="https://img.alicdn.com/imgextra/i2/581166664/O1CN01ePMFmU1z6A1W5J6a4_!!581166664.png" title="https://img.alicdn.com/imgextra/i2/581166664/O1CN01ePMFmU1z6A1W5J6a4_!!581166664.png" /><figcaption>
+Listen netease music in Emacs
+</figcaption>
+</figure>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i2/581166664/O1CN012SFAW41z6A1WeRU9M_!!581166664.png" alt="https://img.alicdn.com/imgextra/i2/581166664/O1CN012SFAW41z6A1WeRU9M_!!581166664.png" title="https://img.alicdn.com/imgextra/i2/581166664/O1CN012SFAW41z6A1WeRU9M_!!581166664.png" /><figcaption>
+Playing Tetris in Emacs
+</figcaption>
+</figure>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i4/581166664/O1CN01hJslQh1z6A1VLFP7y_!!581166664.png" alt="https://img.alicdn.com/imgextra/i4/581166664/O1CN01hJslQh1z6A1VLFP7y_!!581166664.png" title="https://img.alicdn.com/imgextra/i4/581166664/O1CN01hJslQh1z6A1VLFP7y_!!581166664.png" /><figcaption>
+Read EPUB e-books in Emacs
+</figcaption>
+</figure>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i4/581166664/O1CN01DWl21B1z6A1UNsI4U_!!581166664.jpg" alt="https://img.alicdn.com/imgextra/i4/581166664/O1CN01DWl21B1z6A1UNsI4U_!!581166664.jpg" title="https://img.alicdn.com/imgextra/i4/581166664/O1CN01DWl21B1z6A1UNsI4U_!!581166664.jpg" /><figcaption>
+Telegram chat in Emacs
+</figcaption>
+</figure>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN01vpjexS1z6A1PICqIh_!!581166664.gif" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN01vpjexS1z6A1PICqIh_!!581166664.gif" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN01vpjexS1z6A1PICqIh_!!581166664.gif" /><figcaption>
+Run aria2 using EAF in Emacs
+</figcaption>
+</figure>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Free/Libre
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<p>When it comes to Emacs, the person I have to mention is Richard Stallman. There were many versions of Emacs in the early days, but now GNU Emacs has basically unified the world.</p>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i2/581166664/O1CN01VH3Txp1z6A1WcQQ05_!!581166664.jpg" alt="https://img.alicdn.com/imgextra/i2/581166664/O1CN01VH3Txp1z6A1WcQQ05_!!581166664.jpg" title="https://img.alicdn.com/imgextra/i2/581166664/O1CN01VH3Txp1z6A1WcQQ05_!!581166664.jpg" /><figcaption>
+Richard Stallman
+</figcaption>
+</figure>
+<p>
+Stallman strongly advocates free software. The definition of free software can be found on the <a href="https://www.gnu.org/philosophy/free-sw.html">official GNU website</a>, so I won&#39;t repeat it here. Readers at least need to be clear that free in the GNU community stands for freedom, not free beer.</p>
+<p>
+Free software has undoubtedly greatly promoted the development of the software industry. It gives programmers the opportunity to understand the implementation mechanism of the software used. As one of the early works of Stallman, Emacs undoubtedly inherits this idea. Every operation can be traced to the source, I like this feeling of freedom.</p>
+<p>
+More Emacs Hackers can refer to:</p>
+<ul>
+<li>
+<p><a href="http://ergoemacs.org/misc/famous_emacs_users.html">Famous Emacs Users</a> by Xah Lee</p>
+</li>
+<li>
+<p><a href="http://ergoemacs.org/emacs/Matz_Ruby_how_emacs_changed_my_life.html">Ruby Creator Matz on How Emacs Changed My Life</a> by Xah Lee</p>
+</li>
+<li>
+<p><a href="http://wenshanren.org/?p=418">Famous Emacs Users (that are not famous for using Emacs)</a></p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+Getting Started
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+Experience and suggestions
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<p>I came into Emacs because I learned Clojure. As a Lisp, Emacs is undoubtedly the best editor. However, due to the &#34;ugly&#34; UI, &#34;awkward&#34; operation of vanilla Emacs, many attempts were made before comfort with it. It is Emacs tutorial on <a href="https://www.braveclojure.com/basic-emacs/">braveclojure</a> help me overcome the hard days, I used the <a href="https://github.com/flyingmachine/emacs-for-clojure">emacs-for-clojure</a> configuration as the basis, and I forced myself to code in Emacs as much as possible out of my love for Lisp.</p>
+<p>
+It took about a month or two to get through the most difficult period of adaptation, and I couldn&#39;t live without Emacs now. Up to now, <a href="https://github.com/jiacai2050/dotfiles/tree/master/.emacs.d">my configuration file</a> has been enriched a lot, and there are many functions written by myself. Before learning a new language, the relevant Emacs extensions will be configured first, so that everything will be running in Emacs. Here I want to emphasize one point:</p>
+<blockquote>
+<p>In terms of a single function, Emacs may not be the best, but how to organically combine various functions and reduce switching, Emacs is the best.</p>
+</blockquote>
+<p>
+Here are some suggestions based on my own experience after using Emacs for 4 years:</p>
+<ul>
+<li>
+<p>Find a mature configuration and use Emacs first. You don&#39;t have to worry about the details at first. Spacemacs and Doom Emacs are the two most popular in the community. It is recommended that beginners try both to find the most suitable for them.</p>
+</li>
+<li>
+<p>Find a month to focus on familiarizing with Emacs. Don&#39;t use it intermittently, otherwise it will be difficult to adapt to it. Once this month has passed, there will be unlimited &#34;spring breeze&#34;.</p>
+</li>
+<li>
+<p>When various extensions cannot meet your needs and have bugs (I&#39;m in this status probably after two to three years), learn ELisp. After all, this is its essence. Recommend resources: <a href="http://ergoemacs.org/emacs/emacs.html">Practical Emacs Tutorial</a> by Xah Lee and <a href="https://learnxinyminutes.com/docs/elisp/">Learn X in Y minutes</a></p>
+</li>
+<li>
+<p>Make good use <code class="verbatim">C-h i</code>, the documentation that comes with Emacs, especially <a href="https://www.gnu.org/software/emacs/manual/html_node/efaq/Learning-how-to-do-something.html">do I find out how to do something in Emacs?</a></p>
+</li>
+<li>
+<p>As of the beginning of 2020/November, I use Emacs to pursue the &#34;authentic&#34; and try to use Emacs&#39;s own shortcut keys (<code class="verbatim">C-x C-s</code>). Although my little finger started to hurt a year ago, I mapped the CAPS key to Ctrl at that time to overcome this. Problem still remains but I&#39;m this mode for about one more year.</p>
+<p>
+Although the community recommends the use of <a href="https://github.com/emacs-evil/evil">evil</a> to solve this problem, I thought it was not &#34;loyal&#34; enough, and never used it. Until recently I discovered the <a href="https://www.gnu.org/software/emacs/manual/html_mono/viper.html">viper mode</a> and realized the naivety of this idea, Emacs&#39;s core idea is that you can customize it according to your own needs, there is no so-called standard answer. Emacs will absorb the advantages of other editors. So I immediately configured the evil and completely liberated my little finger. After more than four years, I can still learn some life experience from Emacs. It is estimated that this is not possible with other software. This also prompted me to write this article to prevent beginners from falling into this kind of thinking.</p>
+</li>
+</ul>
+<p>Of course, everyone&#39;s learning path is different. Readers can adjust according to their own situation.</p>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+Extensions recommendation
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<div id="outline-container-headline-10" class="outline-4">
+<h4 id="headline-10">
+Org-mode
+</h4>
+<div id="outline-text-headline-10" class="outline-text-4">
+<figure>
+<img src="https://orgmode.org/resources/img/org-mode-unicorn.svg" alt="https://orgmode.org/resources/img/org-mode-unicorn.svg" title="https://orgmode.org/resources/img/org-mode-unicorn.svg" /><figcaption>
+org-mode logo
+</figcaption>
+</figure>
+<p>
+Org-mode is the main reason why many non-programmers choose Emacs. Simply put, it is a markdown-like markup language. Many users use it to take notes and manage GTD. With the help of Emacs&#39;s powerful expansion capabilities, programmers use it for <a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">literate programming</a>, and it deserves to be ranked first in the extension list. 🥇</p>
+<p>
+At present, I use org-mode relatively simply, just use it as markdown at the time. Just this point, coupled with the shortcut keys of Emacs, it has been a few blocks ahead from various editors.</p>
+<p>
+One thing I demo here is table support with org-mode. You can use the <code>org-table-transpose-table-at-point</code> command to transpose row and column of a table.</p>
+<p>
+<img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN01VDVZEM1z6A1UOtSm0_!!581166664.gif" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN01VDVZEM1z6A1UOtSm0_!!581166664.gif" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN01VDVZEM1z6A1UOtSm0_!!581166664.gif" /></p>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-4">
+<h4 id="headline-11">
+Magit
+</h4>
+<div id="outline-text-headline-11" class="outline-text-4">
+<p>
+<img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN01GeC6rw1z6A1VdWuEW_!!581166664.png" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN01GeC6rw1z6A1VdWuEW_!!581166664.png" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN01GeC6rw1z6A1VdWuEW_!!581166664.png" /></p>
+<p>
+Magit provides an interface for Emacs users to operate git. It is the first Emacs extension I rely heavily on and the second-ranked extension in the community. All git operations are extremely smooth with deeply integrated into Emacs&#39;s shortcut keys. Without it, I wouldn&#39;t even be able to <a href="http://www.howardism.org/Technical/Emacs/magit-squashing.html">rebase</a>.</p>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-4">
+<h4 id="headline-12">
+Evil
+</h4>
+<div id="outline-text-headline-12" class="outline-text-4">
+<figure>
+<img src="https://img.alicdn.com/imgextra/i3/581166664/O1CN01TjEFRp1z6A1U4MagS_!!581166664.png" alt="https://img.alicdn.com/imgextra/i3/581166664/O1CN01TjEFRp1z6A1U4MagS_!!581166664.png" title="https://img.alicdn.com/imgextra/i3/581166664/O1CN01TjEFRp1z6A1U4MagS_!!581166664.png" /><figcaption>
+Evil Emacs steal my heart
+</figcaption>
+</figure>
+<p>
+I mentioned evil in my personal experience above . It is not &#34;evil&#34; but Extensible VI Layer for Emacs. In addition to porting vi&#39;s normal/insert/visual state (mode is otherwise referred to in Emacs), Evil also adds emacs state to disable all vi functions. Because it is in Emacs inside, we can customize the shortcut keys to override vi&#39;s default keyboard shortcuts, we can have both <code class="verbatim">h j k l</code> and <code class="verbatim">C-a, C-e, M-s, M-f, M-b</code>.</p>
+<p>
+Copy 7 lines of text, in the normal state of evil, only need</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">7 yy</code></pre></div>
+</div>
+<p>And in Emacs requires</p>
+<div class="src src-text">
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">C-a C-SPC Cu 6 Cn C -e Mw</code></pre></div>
+</div>
+<blockquote>
+<p>The best editor is neither Emacs nor Vim, it&#39;s Emacs with Vim binding!</p>
+</blockquote>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-4">
+<h4 id="headline-13">
+Dired
+</h4>
+<div id="outline-text-headline-13" class="outline-text-4">
+<p>
+Dired is the abbreviation of directory editor and is the built-in extension of Emacs, similar to the file manager Finder on macOS. In Dired interface, you can easily move / delete / create the file just like edit text. The following figure shows how to batch <code class="verbatim">test_foo_*.dat</code> rename <code class="verbatim">test_bar_*.dat</code>. (<a href="http://pragmaticemacs.com/emacs/dired-rename-multiple-files/">source</a>)</p>
+<figure>
+<img src="https://img.alicdn.com/imgextra/i2/581166664/O1CN01QIzFM91z6A1TiEdB0_!!581166664.gif" alt="https://img.alicdn.com/imgextra/i2/581166664/O1CN01QIzFM91z6A1TiEdB0_!!581166664.gif" title="https://img.alicdn.com/imgextra/i2/581166664/O1CN01QIzFM91z6A1TiEdB0_!!581166664.gif" /><figcaption>
+dired rename files in batch
+</figcaption>
+</figure>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-4">
+<h4 id="headline-14">
+Ivy/Counsel/Swiper
+</h4>
+<div id="outline-text-headline-14" class="outline-text-4">
+<p>
+Ivy/Counsel/Swiper is a completion framework, which can easily display the candidates of the current operation in an interactive way, similar to the <a href="https://code.visualstudio.com/docs/getstarted/userinterface#_command-palette">Command Palette</a> in VSCode and <a href="https://blog.jetbrains.com/idea/2020/05/when-the-shift-hits-the-fan-search-everywhere/">Double Shift</a> in Intellj .</p>
+<p>
+<img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN01BnQ5pp1z6A1NIcJrL_!!581166664.png" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN01BnQ5pp1z6A1NIcJrL_!!581166664.png" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN01BnQ5pp1z6A1NIcJrL_!!581166664.png" /></p>
+<p>
+Although other editors have similar functions, their functions are either limited or separated from other functions, and there is no unified experience. Emacs is different, no matter how many extensions we can still have a unified experience, this greatly affects the user experience. Below, ivy-occur + wgrep + evil is used to <a href="https://sam217pa.github.io/2016/09/13/from-helm-to-ivy/">modify the contents of multiple files</a> in bulk to illustrate the powerful functions of the ivy suite.</p>
+<p>
+There are two files <code class="verbatim">1.txt</code> <code class="verbatim">2.txt</code> in current directory, whose content are all <code class="verbatim">hello world</code>,  and modify to <code class="verbatim">hello emacs</code> at last.</p>
+<p>
+<img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN01dS73W31z6A1Tk5UwK_!!581166664.gif" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN01dS73W31z6A1Tk5UwK_!!581166664.gif" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN01dS73W31z6A1Tk5UwK_!!581166664.gif" /></p>
+<p>
+Steps:</p>
+<ul>
+<li>
+<p><code class="verbatim">counsel-ag world</code> search the current directory to search for files containing <code class="verbatim">world</code></p>
+</li>
+<li>
+<p><code class="verbatim">C-c C-o (ivy-occur)</code> Open the occur interface</p>
+</li>
+<li>
+<p><code class="verbatim">C-x C-q (ivy-wgrep-change-to-wgrep-mode)</code> Enter edit mode</p>
+</li>
+<li>
+<p><code class="verbatim">:%s/world/emacs/g</code> Modify content with the help of evil</p>
+</li>
+<li>
+<p><code class="verbatim">C-c C-c (wgrep-finish-edit)</code> Save files</p>
+</li>
+</ul>
+<p>Of course, you can define shortcut keys for the above operations according to your own habits. The above five steps are done in one go.</p>
+</div>
+</div>
+<div id="outline-container-headline-15" class="outline-4">
+<h4 id="headline-15">
+Lsp-mode
+</h4>
+<div id="outline-text-headline-15" class="outline-text-4">
+<figure>
+<img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN01EeQOpy1z6A1U5lWzk_!!581166664.png" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN01EeQOpy1z6A1U5lWzk_!!581166664.png" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN01EeQOpy1z6A1U5lWzk_!!581166664.png" /><figcaption>
+lsp-mode
+</figcaption>
+</figure>
+<p>
+Before the emergence of LSP , there was no unified framework to solve the basic functions of modern IDEs such as highlighting and completion of different languages. The LSP launched by Microsoft has undoubtedly become the industry standard, and there is no need to use regular, which is both inaccurate and rude. There are two extensions in Emacs that support LSP, namely</p>
+<ul>
+<li>
+<p>Lsp-mode, provides all the experience of traditional IDE by default</p>
+</li>
+<li>
+<p>EGlot, the main focus is small and exquisite</p>
+</li>
+</ul>
+<p>Currently I use lsp-mode, beginners can try it, and then choose the one that suits their taste.</p>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-4">
+<h4 id="headline-16">
+More
+</h4>
+<div id="outline-text-headline-16" class="outline-text-4">
+<p>In addition to the extensions introduced above, there are some more &#34;small&#34; extensions I use daily. Of course, the list can go on and on, readers can find out more by yourselve.</p>
+<ul>
+<li>
+<p><code class="verbatim">company</code> completion framework, can be used with lsp-mode</p>
+</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i3/581166664/O1CN01F3lxtC1z6A1RlueN7_!!581166664.png" alt="https://img.alicdn.com/imgextra/i3/581166664/O1CN01F3lxtC1z6A1RlueN7_!!581166664.png" title="https://img.alicdn.com/imgextra/i3/581166664/O1CN01F3lxtC1z6A1RlueN7_!!581166664.png" /></p>
+<ul>
+<li>
+<p><code class="verbatim">multiple-cursors</code></p>
+</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i4/581166664/O1CN01ceUOar1z6A1OW1MMp_!!581166664.gif" alt="https://img.alicdn.com/imgextra/i4/581166664/O1CN01ceUOar1z6A1OW1MMp_!!581166664.gif" title="https://img.alicdn.com/imgextra/i4/581166664/O1CN01ceUOar1z6A1OW1MMp_!!581166664.gif" /></p>
+<ul>
+<li>
+<p><code class="verbatim">ace-jump-mode</code> moves the cursor quickly according to the character. The figure below is an example of fast jump according to p</p>
+</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN019sHvUm1z6A1R9QtHn_!!581166664.gif" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN019sHvUm1z6A1R9QtHn_!!581166664.gif" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN019sHvUm1z6A1R9QtHn_!!581166664.gif" /></p>
+<ul>
+<li>
+<p><code class="verbatim">yasnippet</code> template system, which simplifies input by defining abbreviations for code fragments</p>
+</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i2/581166664/O1CN01lQVIpx1z6A1Wz6Th3_!!581166664.png" alt="https://img.alicdn.com/imgextra/i2/581166664/O1CN01lQVIpx1z6A1Wz6Th3_!!581166664.png" title="https://img.alicdn.com/imgextra/i2/581166664/O1CN01lQVIpx1z6A1Wz6Th3_!!581166664.png" /></p>
+<ul>
+<li>
+<p><code class="verbatim">flycheck</code> syntax real-time check</p>
+</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i4/581166664/O1CN01gL8IST1z6A1WZt3Dk_!!581166664.png" alt="https://img.alicdn.com/imgextra/i4/581166664/O1CN01gL8IST1z6A1WZt3Dk_!!581166664.png" title="https://img.alicdn.com/imgextra/i4/581166664/O1CN01gL8IST1z6A1WZt3Dk_!!581166664.png" /></p>
+<ul>
+<li>
+<p><code class="verbatim">treemacs</code> file directory tree navigation</p>
+</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i3/581166664/O1CN01oTtvbz1z6A1RykfJ8_!!581166664.png" alt="https://img.alicdn.com/imgextra/i3/581166664/O1CN01oTtvbz1z6A1RykfJ8_!!581166664.png" title="https://img.alicdn.com/imgextra/i3/581166664/O1CN01oTtvbz1z6A1RykfJ8_!!581166664.png" /></p>
+<ul>
+<li>
+<p><code class="verbatim">projectile</code> project workspace management</p>
+</li>
+</ul>
+<p><img src="https://img.alicdn.com/imgextra/i3/581166664/O1CN01yHD9GD1z6A1Tmi66V_!!581166664.gif" alt="https://img.alicdn.com/imgextra/i3/581166664/O1CN01yHD9GD1z6A1Tmi66V_!!581166664.gif" title="https://img.alicdn.com/imgextra/i3/581166664/O1CN01yHD9GD1z6A1Tmi66V_!!581166664.gif" />
+ The above illustration shows how to find files in a project, switch between implementation and testing, and switch between different projects</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-17" class="outline-2">
+<h2 id="headline-17">
+Conclusion
+</h2>
+<div id="outline-text-headline-17" class="outline-text-2">
+<p>Perhaps the popularity of Emacs is far less than VSCode, but this is not a bad thing. For example, free riders are not suitable for using Emacs. Let them in will only lower the overall level of the community; and Emacs is an open system, it will learn from excellent design in VSCode, Emacs and other editors are not mutually exclusive.</p>
+<p>
+There will alway be posts telling switch bewteen Emacs than other editors in the Internet, this kind of controversial topic will undoubtedly attract everyone’s attention, but don’t forget the free spirit of Emacs. The one that suits you is the best. There is no need to indulge in something.</p>
+<p>
+After all, Emacs/VSCode are just tools. Solving practical problems is the most important thing. Of course, a comfortable <del>operating system</del> editor will make this boring process fun.</p>
+<p>
+Finally, I want to share with you a sentence from <a href="https://www.masteringemacs.org/article/the-emacs-27-edition-of-mastering-emacs-out-now">Mastering Emacs</a>, Happy Emacs.</p>
+<blockquote>
+<p>Your patient mastery of Emacs is well-rewarded. I assure you.</p>
+</blockquote>
+<p>
+<img src="https://img.alicdn.com/imgextra/i1/581166664/O1CN01bolPgY1z6A1VNlxl8_!!581166664.jpg" alt="https://img.alicdn.com/imgextra/i1/581166664/O1CN01bolPgY1z6A1VNlxl8_!!581166664.jpg" title="https://img.alicdn.com/imgextra/i1/581166664/O1CN01bolPgY1z6A1VNlxl8_!!581166664.jpg" /></p>
+</div>
+</div>
+<div id="outline-container-headline-18" class="outline-2">
+<h2 id="headline-18">
+Reference
+</h2>
+<div id="outline-text-headline-18" class="outline-text-2">
+<ul>
+<li>
+<p><a href="https://irreal.org/blog/?p=279">Emacs As A Lisp Machine</a></p>
+</li>
+<li>
+<p><a href="https://news.ycombinator.com/item?id=18398324">Ask HN: Is Visual Studio Code the Emacs of 21st century?</a></p>
+</li>
+<li>
+<p><a href="https://www.reddit.com/r/emacs/comments/flpzft/what_benefits_does_emacs_offer_over_vs_code/">What benefits does emacs offer over vs code</a></p>
+</li>
+<li>
+<p><a href="https://unix.stackexchange.com/questions/986/what-are-the-pros-and-cons-of-vim-and-emacs">What are the pros and cons of Vim and Emacs?</a></p>
+</li>
+<li>
+<p><a href="https://lwn.net/Articles/819452/">Making Emacs popular again</a></p>
+</li>
+<li>
+<p><a href="https://web.archive.org/web/20190430192029/https://m.facebook.com/notes/daniel-colascione/buttery-smooth-emacs/10155313440066102/">Buttery Smooth Emacs</a></p>
+</li>
+<li>
+<p><a href="https://batsov.com/articles/2011/11/19/why-emacs/">https://batsov.com/articles/2011/11/19/why-emacs/</a></p>
+</li>
+<li>
+<p><a href="https://github.com/remacs/remacs#why-emacs">https://github.com/remacs/remacs#why-emacs</a></p>
+</li>
+</ul>
+</div>
+</div>
+
+  </section>
+
+  <section>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "liujiacai" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+    
+  </section>
+</article>
+
+      </div>
+
+      <div id="side" class="pr-1 bg-white">
+        <aside class="pr-3">
+          
+  
+    <div id="toc" class="Box Box--blue mb-3">
+      <b>Everything you need to know before master Emacs</b><nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Core concept</a>
+<ul>
+<li><a href="#headline-2">Text editor</a>
+<ul>
+<li><a href="#headline-3">Backup</a>
+</li>
+<li><a href="#headline-4">Undo/Redo</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-5">Expansion and customization</a>
+</li>
+<li><a href="#headline-6">Free/Libre</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">Getting Started</a>
+<ul>
+<li><a href="#headline-8">Experience and suggestions</a>
+</li>
+<li><a href="#headline-9">Extensions recommendation</a>
+<ul>
+<li><a href="#headline-10">Org-mode</a>
+</li>
+<li><a href="#headline-11">Magit</a>
+</li>
+<li><a href="#headline-12">Evil</a>
+</li>
+<li><a href="#headline-13">Dired</a>
+</li>
+<li><a href="#headline-14">Ivy/Counsel/Swiper</a>
+</li>
+<li><a href="#headline-15">Lsp-mode</a>
+</li>
+<li><a href="#headline-16">More</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#headline-17">Conclusion</a>
+</li>
+<li><a href="#headline-18">Reference</a>
+</li>
+</ul>
+</nav></div>
+  
+
+  
+    
+    
+      <div>
+        
+          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+        
+
+        
+          <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&mobile_iframe=true&width=61&height=20&appId" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
+        
+
+        
+          <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        
+
+        
+          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
+          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+        
+
+      </div>
+    
+  
+
+        </aside>
+      </div>
+
+      <div id="footer" class="pt-2 pb-3 bg-white text-center">
+        
+
+  <span class="text-small text-gray">
+    ©KeepCoding 2020 &middot; 
+
+    Powered by the
+    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
+    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
+  </span>
+
+
+      </div>
+    </div>
+
+    
+    
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
+    
+  </body>
+</html>

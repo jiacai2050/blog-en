@@ -2,10 +2,14 @@ baseURL = "https://en.liujiacai.net/"
 languageCode = "en-us"
 title = "KeepCoding"
 theme = "hugo-primer"
+publishDir = "docs"
 
 hasCJKLanguage = true
 summaryLength = 70
 copyright = "&copy;KeepCoding 2020"
+disqusShortname="liujiacai"
+enableInlineShortcodes = true
+footnoteReturnLinkContents = "^"
 
 [frontmatter]
 # update sitemap.xml's lastmod datetime by file change time, instead of git.
@@ -17,6 +21,9 @@ description = "Jiacai's blog"
 shareTo = ["Twitter", "Hatena", "Facebook", "Pocket"]
 # You may disable copyright sentence by setting this to false.
 showFooterCredits = true
+useIcon = true
+useTwitterCard = true
+twitter = "liujiacai"
 
 [permalinks]
   posts = "/:year/:month/:day/:filename/"
