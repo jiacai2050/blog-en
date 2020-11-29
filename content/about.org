@@ -5,7 +5,6 @@
 #+KEYWORDS[]:
 #+SLUG:
 #+SUMMARY:
----
 
 - https://about.me/liujiacai
 - [[https://liujiacai.net/][Chinese blog]]
