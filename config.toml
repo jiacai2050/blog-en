@@ -1,0 +1,22 @@
+baseURL = "https://en.liujiacai.net/"
+languageCode = "en-us"
+title = "KeepCoding"
+theme = "hugo-primer"
+
+hasCJKLanguage = true
+summaryLength = 70
+copyright = "&copy;KeepCoding 2020"
+
+[frontmatter]
+# update sitemap.xml's lastmod datetime by file change time, instead of git.
+lastmod = ["lastmod", ":fileModTime", ":default"]
+
+[params]
+description = "Jiacai's blog"
+# Chose Social Sharing Buttons you want to use.
+shareTo = ["Twitter", "Hatena", "Facebook", "Pocket"]
+# You may disable copyright sentence by setting this to false.
+showFooterCredits = true
+
+[permalinks]
+  posts = "/:year/:month/:day/:filename/"

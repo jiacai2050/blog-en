@@ -1,0 +1,62 @@
+#+TITLE: Everything you need to know before try Emacs
+#+DATE: 2020-11-29T09:06:19+08:00
+#+DRAFT: false
+#+TAGS[]: emacs
+#+KEYWORDS[]:
+#+SLUG:
+#+SUMMARY:
+
+When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly [[https://www.zdnet.com/article/the-10-oldest-significant-open-source-programs/][forty years]] . However, due to the high learning curve of Emacs entry, many beginners abandon it before grasping its essence. Before I was "skilled" in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.
+
+This article will be divided into two parts to introduce how to get started with Emacs. The first part will introduce the core concept. I think the reason why many beginners give up after simply trying Emacs is that they don’t understand its design concept. Emacs is so unique that there are a lot of discomforts when moved from traditional editors. By understanding its concept, readers can judge whether Emacs is in line with their own taste and whether it is worth the effort to master it.
+The second part will give some specific suggestions to beginners who want to get started with Emacs based on my more than four years of experience. Later, I will introduce some extensions that I use daily. Many users choose Emacs because of a certain function of one of the extension. I often amaze the power of Emacs because of the advanced usage of some entension.
+
+Although this article will use ELisp as an example, readers do not need to learn ELisp and basic programming skills is enough. Secondly, this article compares the features of Emacs with the more popular VSCode editor, and it is also valid to change to other editors.
+
+#+begin_quote
+Emacs is Emacs VSCode / Vim / Sublime ... is yet just another editor ---- [[https://news.ycombinator.com/item?id=18400204][Source]]
+#+end_quote
+
+#+CAPTION: Learning curves
+[[https://img.alicdn.com/imgextra/i4/581166664/O1CN0156nQHc1z6A1VldH2x_!!581166664.png]]
+
+* Core concept
+The official [[https://www.gnu.org/software/emacs/][GNU Emacs]] website introduces this:
+#+begin_quote
+An extensible, customizable, free/libre text editor — and more.
+#+end_quote
+The first part is fairly straightforward, as for the =more= part, the benevolent sees benevolence, and the wise see wisdom. It was once joked that Emacs was an operating system disguised as an editor. This section will unveil the mystery of Emacs.
+
+** Text editor
+No matter how Emacs fans deify it, first Emacs is a text editor, and then the others. Unlike VSCode, Emacs is designed for pure keyboard operation, and the similar editor is only Vi. The operation of the pure keyboard ensures that the user can complete the work most efficiently. At the same time, this has become a barrier for beginners to get started, and it takes some time to adapt.
+As far as text editing is concerned, Emacs provides a lot of thoughtful functions. Here are two things:
+
+*** Backup
+As a mature programmer, you need to be aware of backups at all times. After all, mistakes are inevitable. In Emacs, there are mainly two backup methods, called static backup and automatic backup (auto saving) here.
+
+- Static backup occurs when you first open the file, the end of the backup file name has =~= labeled; and support multiple versions of backup
+- Automatic backup As the name suggests, periodically save the current file being edited, the file name of the head and tail have =#= marked. When saving, the automatically backed up files will be deleted, and when Emacs crashes due to unexpected reasons (such as a crash), the files will be retained, and you can use the recover-this-file command to restore.
+
+#+begin_src
+Statically backed up files
+!Users!liujiacai!.emacs.d!README.org.~ 1 ~
+!Users!liujiacai!.emacs.d!README.org.~ 2 ~
+!Users!liujiacai!.emacs.d!customizations! editing.el.~ 1 ~*
+!Users!liujiacai!.emacs.d!customizations!editing.el.~ 44 ~*
+!Users!liujiacai!.emacs.d!customizations!editing.el.~ 45 ~*
+!Users !liujiacai!.emacs.d!customizations!editing.el.~ 46 ~*
+!Users!liujiacai!.emacs.d!customizations!editing.el.~ 47 ~*
+!Users!liujiacai!.emacs.d!customizations! editing.el.~ 48 ~*
+
+Automatically backed up files
+#!Users!liujiacai!.emacs.d!customizations!misc.org#
+#!Users!liujiacai!.emacs.d!customizations!navigation.el#*
+#!Users!liujiacai!.emacs.d! elpa!lsp-java- 20201105.1758 !lsp-java.el#
+#!Users!liujiacai!.emacs.d!init.el#
+#+end_src
+The above is part of the backup file of my computer. Thanks to these two functions, I have been rescued from the edge of a crash many times. As far as I know, no editor has such intimate features.
+
+*** Undo/Redo
+When editing the file, revoked when (the Undo) and recovery (Redo) is a very important function, both conventional editor operations are linear, whereas in Emacs, is a tree, where a set of text editing by The state diagram to illustrate the difference between the two.
+
+- Enter the three characters =a b c=, state in the figure below
