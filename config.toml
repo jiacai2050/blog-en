@@ -20,3 +20,8 @@ showFooterCredits = true
 
 [permalinks]
   posts = "/:year/:month/:day/:filename/"
+
+[[menu.main]]
+name="About"
+url="/about"
+weight="1"
