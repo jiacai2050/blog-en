@@ -8,12 +8,12 @@
     <language>en</language>
     <lastBuildDate>Sun, 29 Nov 2020 09:06:19 +0800</lastBuildDate><atom:link href="https://en.liujiacai.net/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
     <item>
-      <title>Everything you need to know before try Emacs</title>
+      <title>What you need to know before try Emacs</title>
       <link>https://en.liujiacai.net/2020/11/29/why-emacs/</link>
       <pubDate>Sun, 29 Nov 2020 09:06:19 +0800</pubDate>
       
       <guid>https://en.liujiacai.net/2020/11/29/why-emacs/</guid>
-      <description>When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &amp;#34;skilled&amp;#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.</description>
+      <description>When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has nearly forty years of history. However, many users abandon Emacs before comfort with it due to the steep learning curve. I understand their frustration, I also made many attempts before &amp;#34;skilled&amp;#34; in Emacs. After spend honey moon with Emacs for four years, I think I can share what I learn from Emacs and it&amp;#39;s best if it&amp;#39;s beneficial for newcomers.</description>
     </item>
     
   </channel>
