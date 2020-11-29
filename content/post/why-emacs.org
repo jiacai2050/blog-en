@@ -1,4 +1,4 @@
-#+TITLE: Everything you need to know before master Emacs
+#+TITLE: Everything you need to know before try Emacs
 #+DATE: 2020-11-29T09:06:19+08:00
 #+DRAFT: false
 #+TAGS[]: emacs

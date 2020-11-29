@@ -1,105 +1,190 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>
-      
-  Everything you need to know before master Emacs &ndash; KeepCoding
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Everything you need to know before try Emacs - KeepCoding</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
 
-    </title>
-    
-    
-    <meta name="description" property="og:description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &amp;#34;skilled&amp;#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.|Jiacai&#39;s blog">
-    
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <meta name="apple-mobile-web-app-title" content="KeepCoding">
-    
-    
-    <link rel="icon" href="/favicon-64.png">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="mask-icon" size="any" href="/pinned-icon.svg">
-    
-    
-    
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:site" content="@liujiacai">
-    <meta name="twitter:creator" content="@liujiacai">
-    <meta name="twitter:title" content="Everything you need to know before master Emacs | KeepCoding">
-    <meta name="twitter:description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &#34;skilled&#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.|Jiacai&#39;s blog">
-    <meta name="twitter:image" content="https://en.liujiacai.net/twitter-card.png">
-    
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
-    <link rel="stylesheet" href="/assets/syntax.css">
-    <link rel="stylesheet" href="/assets/primer-build.css">
-    <link rel="stylesheet" href="/assets/style.css">
-    <link rel="stylesheet" href="/assets/custom_style.css">
-  </head>
+<meta name="author" content="Jiacai Liu" /><meta name="description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &amp;#34;skilled&amp;#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career." /><meta name="keywords" content="Emacs, Rust, Database, Clojure, Lisp" />
 
 
-  <body class="bg-gray">
-    <div id="holy" class="container-lg bg-white h-100">
 
-      <div id="header" class="px-1 bg-white">
-        <nav class="UnderlineNav UnderlineNav--right px-2">
-  <a class="UnderlineNav-actions muted-link h2" href="https://en.liujiacai.net/">
-    KeepCoding
-  </a>
 
-  
-  
-  <div class="UnderlineNav-body">
-    
-    
-    
-    <a class="UnderlineNav-item" href="/about">
-      
-      <span>About</span>
-    </a>
-    
-    
+
+
+<meta name="generator" content="Hugo 0.79.0 with theme even" />
+
+
+<link rel="canonical" href="https://en.liujiacai.net/2020/11/29/why-emacs/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.c7bc1becf36bcf6a9ebd25d2947e43a2eb745ddb0c9a32b43126fd7fa460c351.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Everything you need to know before try Emacs" />
+<meta property="og:description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &#34;skilled&#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://en.liujiacai.net/2020/11/29/why-emacs/" />
+<meta property="article:published_time" content="2020-11-29T09:06:19+08:00" />
+<meta property="article:modified_time" content="2020-11-29T17:11:56+08:00" />
+<meta itemprop="name" content="Everything you need to know before try Emacs">
+<meta itemprop="description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &#34;skilled&#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.">
+<meta itemprop="datePublished" content="2020-11-29T09:06:19+08:00" />
+<meta itemprop="dateModified" content="2020-11-29T17:11:56+08:00" />
+<meta itemprop="wordCount" content="3234">
+
+
+
+<meta itemprop="keywords" content="emacs," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Everything you need to know before try Emacs"/>
+<meta name="twitter:description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly forty years . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &#34;skilled&#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">KeepCoding</a>
   </div>
-  
-</nav>
-
-      </div>
-
-      <div role="main" id="main" class="holy-main markdown-body px-4 bg-white">
-        
-
-<div class="Subhead">
-  <div class="Subhead-heading">
-    <div class="h1 mt-3 mb-1">Everything you need to know before master Emacs</div>
-  </div>
-  <div class="Subhead-description">
-    
-
-
-
-
-<a href='/tags/emacs' class="muted-link">
-  <span class="Label Label--gray">emacs</span>
-</a>
-
-
-
-    
-    <div class="float-md-right">
-      <span title="Lastmod: 2020-11-29. Published at: 2020-11-29.">
-        
-          Lastmod: 2020-11-29
-        
-      </span>
-    </div>
-    
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
   </div>
 </div>
-<article>
-  
-  <section class="pb-6 mb-3 border-bottom">
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">KeepCoding</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
     
+    <header class="post-header">
+      <h1 class="post-title">Everything you need to know before try Emacs</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2020-11-29 09:06 </span>
+        
+          <span class="more-meta"> 3234 words </span>
+          <span class="more-meta"> 16 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Core concept</a>
+<ul>
+<li><a href="#headline-2">Text editor</a>
+<ul>
+<li><a href="#headline-3">Backup</a>
+</li>
+<li><a href="#headline-4">Undo/Redo</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-5">Expansion and customization</a>
+</li>
+<li><a href="#headline-6">Free/Libre</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-7">Getting Started</a>
+<ul>
+<li><a href="#headline-8">Experience and suggestions</a>
+</li>
+<li><a href="#headline-9">Extensions recommendation</a>
+<ul>
+<li><a href="#headline-10">Org-mode</a>
+</li>
+<li><a href="#headline-11">Magit</a>
+</li>
+<li><a href="#headline-12">Evil</a>
+</li>
+<li><a href="#headline-13">Dired</a>
+</li>
+<li><a href="#headline-14">Ivy/Counsel/Swiper</a>
+</li>
+<li><a href="#headline-15">Lsp-mode</a>
+</li>
+<li><a href="#headline-16">More</a>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#headline-17">Conclusion</a>
+</li>
+<li><a href="#headline-18">Reference</a>
+</li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
 <p>
 When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has a long history of nearly <a href="https://www.zdnet.com/article/the-10-oldest-significant-open-source-programs/">forty years</a> . However, due to the high learning curve of Emacs, many beginners abandon it before grasping its essence. Before I was &#34;skilled&#34; in using Emacs, I was so abused by it, but fortunately I persisted and added a lot of fun to my programming career.</p>
 <p>
@@ -156,7 +241,26 @@ Backup
 </li>
 </ul>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">Statically backed up files
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">Statically backed up files
 !Users!liujiacai!.emacs.d!README.org.~ 1 ~
 !Users!liujiacai!.emacs.d!README.org.~ 2 ~
 !Users!liujiacai!.emacs.d!customizations! editing.el.~ 1 ~*
@@ -170,7 +274,9 @@ Automatically backed up files
 #!Users!liujiacai!.emacs.d!customizations!misc.org#
 #!Users!liujiacai!.emacs.d!customizations!navigation.el#*
 #!Users!liujiacai!.emacs.d! elpa!lsp-java- 20201105.1758 !lsp-java.el#
-#!Users!liujiacai!.emacs.d!init.el#</code></pre></div>
+#!Users!liujiacai!.emacs.d!init.el#</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <p>The above is part of the backup file in my computer. Thanks to these two functions, I have been rescued from the edge of a crash many times. As far as I know, no editor has such intimate features.</p>
 </div>
@@ -187,7 +293,21 @@ Undo/Redo
 </li>
 </ul>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
 ;;                                |
 ;;                                |
 ;;                                o  (first edit)
@@ -196,7 +316,9 @@ Undo/Redo
 ;;                                o  (second edit)
 ;;                                |
 ;;                                |
-;;                                x  (current buffer state)</code></pre></div>
+;;                                x  (current buffer state)</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <ul>
 <li>
@@ -204,7 +326,21 @@ Undo/Redo
 </li>
 </ul>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
 ;;                                |
 ;;                                |
 ;;                                x  (current buffer state)
@@ -213,11 +349,33 @@ Undo/Redo
 ;;                                o
 ;;                                |
 ;;                                |
-;;                                o</code></pre></div>
+;;                                o</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <p>However, Emacs is not the case, its status is</p>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">;;                                o  (initial buffer state)
 ;;                                |
 ;;                                |
 ;;                                o  (first edit)
@@ -232,11 +390,27 @@ Undo/Redo
 ;;                                o  (first undo)
 ;;                                |
 ;;                                |
-;;                                x  (second undo)</code></pre></div>
+;;                                x  (second undo)</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <p>The state is append-only, and a undo means returning to the last state, so the following state diagram may be more appropriate:</p>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;        (initial buffer state)  o
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">;;        (initial buffer state)  o
 ;;                                |
 ;;                                |
 ;;                  (first edit)  o  x  (second undo)
@@ -245,7 +419,9 @@ Undo/Redo
 ;;                 (second edit)  o  o  (first undo)
 ;;                                | /
 ;;                                |/
-;;                                o  (buffer state before undo)</code></pre></div>
+;;                                o  (buffer state before undo)</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <ul>
 <li>
@@ -253,7 +429,26 @@ Undo/Redo
 </li>
 </ul>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">;;            Undo/Redo:                      Emacs&#39; undo
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">;;            Undo/Redo:                      Emacs&#39; undo
 ;;
 ;;               o                                o
 ;;               |                                |
@@ -267,7 +462,9 @@ Undo/Redo
 ;;               .                                o     |
 ;;                                                      |
 ;;                                                      |
-;;                                                      x  (new edit)</code></pre></div>
+;;                                                      x  (new edit)</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <ul>
 <li>
@@ -300,15 +497,30 @@ One of the advantages of Lisp REPL is that it can dynamically change the interna
 <p>
 This advantage of dynamically change state of running program is easy to extend, such as</p>
 <div class="src src-emacs">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-emacs" data-lang="emacs">(defun my/google-search ()
-  <span style="color:#e6db74">&#34;Googles a query or region if any.&#34;</span>
-  (interactive)
-  (browse-url
-   (<span style="color:#a6e22e">concat</span>
-    <span style="color:#e6db74">&#34;http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=&#34;</span>
-    (if mark-active
-        (<span style="color:#a6e22e">buffer-substring</span> (<span style="color:#a6e22e">region-beginning</span>) (<span style="color:#a6e22e">region-end</span>))
-      (<span style="color:#a6e22e">read-string</span> <span style="color:#e6db74">&#34;Google: &#34;</span>)))))</code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-emacs" data-lang="emacs"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my/google-search</span> <span class="p">()</span>
+  <span class="s">&#34;Googles a query or region if any.&#34;</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">browse-url</span>
+   <span class="p">(</span><span class="nf">concat</span>
+    <span class="s">&#34;http://www.google.com/search?ie=utf-8&amp;oe=utf-8&amp;q=&#34;</span>
+    <span class="p">(</span><span class="nb">if</span> <span class="nv">mark-active</span>
+        <span class="p">(</span><span class="nf">buffer-substring</span> <span class="p">(</span><span class="nf">region-beginning</span><span class="p">)</span> <span class="p">(</span><span class="nf">region-end</span><span class="p">))</span>
+      <span class="p">(</span><span class="nf">read-string</span> <span class="s">&#34;Google: &#34;</span><span class="p">)))))</span></code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <p>Put the few lines of code above to <code class="verbatim">init.el</code>, We add a useful function to open a browser in Emacs, and do google search.</p>
 <p>
@@ -476,11 +688,25 @@ I mentioned evil in my personal experience above . It is not &#34;evil&#34; but 
 <p>
 Copy 7 lines of text, in the normal state of evil, only need</p>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">7 yy</code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">7 yy</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <p>And in Emacs requires</p>
 <div class="src src-text">
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">C-a C-SPC Cu 6 Cn C -e Mw</code></pre></div>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-text" data-lang="text">C-a C-SPC Cu 6 Cn C -e Mw</code></pre></td></tr></table>
+</div>
+</div>
 </div>
 <blockquote>
 <p>The best editor is neither Emacs nor Vim, it&#39;s Emacs with Vim binding!</p>
@@ -669,139 +895,104 @@ Reference
 </div>
 </div>
 
-  </section>
-
-  <section>
-    
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "liujiacai" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
-    
-  </section>
-</article>
-
-      </div>
-
-      <div id="side" class="pr-1 bg-white">
-        <aside class="pr-3">
-          
-  
-    <div id="toc" class="Box Box--blue mb-3">
-      <b>Everything you need to know before master Emacs</b><nav id="TableOfContents">
-<ul>
-<li><a href="#headline-1">Core concept</a>
-<ul>
-<li><a href="#headline-2">Text editor</a>
-<ul>
-<li><a href="#headline-3">Backup</a>
-</li>
-<li><a href="#headline-4">Undo/Redo</a>
-</li>
-</ul>
-</li>
-<li><a href="#headline-5">Expansion and customization</a>
-</li>
-<li><a href="#headline-6">Free/Libre</a>
-</li>
-</ul>
-</li>
-<li><a href="#headline-7">Getting Started</a>
-<ul>
-<li><a href="#headline-8">Experience and suggestions</a>
-</li>
-<li><a href="#headline-9">Extensions recommendation</a>
-<ul>
-<li><a href="#headline-10">Org-mode</a>
-</li>
-<li><a href="#headline-11">Magit</a>
-</li>
-<li><a href="#headline-12">Evil</a>
-</li>
-<li><a href="#headline-13">Dired</a>
-</li>
-<li><a href="#headline-14">Ivy/Counsel/Swiper</a>
-</li>
-<li><a href="#headline-15">Lsp-mode</a>
-</li>
-<li><a href="#headline-16">More</a>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#headline-17">Conclusion</a>
-</li>
-<li><a href="#headline-18">Reference</a>
-</li>
-</ul>
-</nav></div>
-  
-
-  
-    
-    
-      <div>
-        
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
-        
-
-        
-          <iframe src="https://www.facebook.com/plugins/share_button.php?href=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&layout=button&size=small&mobile_iframe=true&width=61&height=20&appId" width="61" height="20" style="border:none;overflow:hidden" scrolling="no" frameborder="0" allowTransparency="true" allow="encrypted-media"></iframe>
-        
-
-        
-          <a href="http://b.hatena.ne.jp/entry/" class="hatena-bookmark-button" data-hatena-bookmark-layout="basic-label-counter" data-hatena-bookmark-lang="ja" title="このエントリーをはてなブックマークに追加"><img src="https://b.st-hatena.com/images/entry-button/button-only@2x.png" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a><script type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        
-
-        
-          <a data-pocket-label="pocket" data-pocket-count="none" class="pocket-btn" data-lang="en"></a>
-          <script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="https://widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
-        
-
-      </div>
-    
-  
-
-        </aside>
-      </div>
-
-      <div id="footer" class="pt-2 pb-3 bg-white text-center">
-        
-
-  <span class="text-small text-gray">
-    ©KeepCoding 2020 &middot; 
-
-    Powered by the
-    <a href="https://github.com/qqhann/hugo-primer" class="link-gray-dark">Hugo-Primer</a> theme for
-    <a href="https://gohugo.io" class="link-gray-dark">Hugo</a>.
-  </span>
-
-
-      </div>
     </div>
 
-    
-    
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    
-    <script type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script>
-    
-  </body>
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Jiacai Liu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2020-11-29 17:11
+        <a href="https://github.com/jiacai2050/blog-en/commit/277ca4bd0297b308b103eaec423b023c9bf7dfcb" title="switch to even theme">(277ca4b)</a>
+    </span>
+  </p>
+  
+  
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/emacs/">emacs</a>
+          </div>
+      <nav class="post-nav">
+        
+        
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'liujiacai';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:jiacai2050&#43;blog@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/2163429/jiacai-liu" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/liujiacai" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/jiacai2050" class="iconfont icon-github" title="github"></a>
+  <a href="https://en.liujiacai.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020<span class="heart"><i class="iconfont icon-heart"></i></span><span>Jiacai Liu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+
+
+
+
+
+
+</body>
 </html>

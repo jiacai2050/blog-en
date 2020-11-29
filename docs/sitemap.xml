@@ -1,39 +1,52 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
-  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+<?xml-stylesheet type="text/xsl" href="https://en.liujiacai.net/sitemap.xsl"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
     <loc>https://en.liujiacai.net/about/</loc>
-    <lastmod>2020-11-29T13:01:54+08:00</lastmod>
+    <lastmod>2020-11-29T17:11:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://en.liujiacai.net/tags/emacs/</loc>
-    <lastmod>2020-11-29T12:47:44+08:00</lastmod>
+    <lastmod>2020-11-29T17:11:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://en.liujiacai.net/2020/11/29/why-emacs/</loc>
-    <lastmod>2020-11-29T12:47:44+08:00</lastmod>
+    <lastmod>2020-11-29T17:11:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://en.liujiacai.net/</loc>
-    <lastmod>2020-11-29T13:01:54+08:00</lastmod>
+    <lastmod>2020-11-29T17:11:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
-    <loc>https://en.liujiacai.net/posts/</loc>
-    <lastmod>2020-11-29T12:47:44+08:00</lastmod>
+    <loc>https://en.liujiacai.net/post/</loc>
+    <lastmod>2020-11-29T17:11:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://en.liujiacai.net/tags/</loc>
-    <lastmod>2020-11-29T12:47:44+08:00</lastmod>
+    <lastmod>2020-11-29T17:11:56+08:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
   <url>
     <loc>https://en.liujiacai.net/categories/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.5</priority>
   </url>
   
 </urlset>

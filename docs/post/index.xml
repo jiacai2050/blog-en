@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>emacs on KeepCoding</title>
-    <link>https://en.liujiacai.net/tags/emacs/</link>
-    <description>Recent content in emacs on KeepCoding</description>
+    <title>Posts on KeepCoding</title>
+    <link>https://en.liujiacai.net/post/</link>
+    <description>Recent content in Posts on KeepCoding</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Sun, 29 Nov 2020 09:06:19 +0800</lastBuildDate><atom:link href="https://en.liujiacai.net/tags/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 29 Nov 2020 09:06:19 +0800</lastBuildDate><atom:link href="https://en.liujiacai.net/post/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Everything you need to know before try Emacs</title>
       <link>https://en.liujiacai.net/2020/11/29/why-emacs/</link>

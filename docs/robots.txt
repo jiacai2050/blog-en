@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://en.liujiacai.net/sitemap.xml
