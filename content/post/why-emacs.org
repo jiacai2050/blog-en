@@ -6,14 +6,14 @@
 #+SLUG:
 #+SUMMARY:
 
-When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has nearly [[https://www.zdnet.com/article/the-10-oldest-significant-open-source-programs/][forty years]] of history. However, many users abandon Emacs before comfort with it due to the steep learning curve. I understand their frustration, I also made many attempts before "skilled" in Emacs. After spend honey moon with Emacs for four years, I think I can share what I learn from Emacs and it's best if it's beneficial for newcomers.
+When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has nearly [[https://www.zdnet.com/article/the-10-oldest-significant-open-source-programs/][forty years]] of history. However, many users abandon Emacs before comfort with it due to the steep learning curve. I understand their frustration, I also made many attempts before "skilled" in Emacs.
 
-This article will be divided into two parts:
-1. The first part will introduce Emacs' core concept. I think the reason why many beginners give up after simply trying is that they don’t understand its design concept. Emacs is so unique that there are a lot of discomforts when migrate from other editors.
+After spend honey moon with Emacs for four years, I think I can share what I learn from Emacs and shed some light for newcomers. This article will be divided into two parts:
+1. The first part will introduce core concept of Emacs. I think the reason why many beginners give up after simply trying is that they don’t understand its design concept. Emacs is so unique that there are a lot of discomforts when migrate from other editors.
 
   By understanding its concept, readers can judge whether Emacs is in line with their own taste and whether it is worth the effort to master it.
 
-2. The second part will give some specific suggestions to beginners who want to get started with Emacs. Some extensions I use daily will also be introduce since many users choose Emacs because of a certain function of a extension. Until now I'm still amazed at the power of Emacs because of the advanced usage of a entension.
+2. The second part will give some specific suggestions to beginners who want to get started with Emacs. Some extensions I use daily will also be introduce since many users choose Emacs because of a certain function of a extension. Until now I'm still amazed at the power of Emacs because of the advanced usage of an extension.
 
 Although this article will use ELisp as an example, readers do not need ELisp knowledge and basic programming skills is enough. Secondly, this article compares the features of Emacs with VSCode which is the most popular editor now, and it is also valid to change to other editors(Sublime/Vim to name a few).
 
@@ -29,21 +29,24 @@ The official [[https://www.gnu.org/software/emacs/][GNU Emacs]] website introduc
 #+begin_quote
 An extensible, customizable, free/libre text editor — and more.
 #+end_quote
-The first part is fairly straightforward, as for the =more= part, the benevolent sees benevolence, and the wise see wisdom. It was once joked that Emacs was an operating system disguised as an editor. This section will unveil the mystery of Emacs.
+The first part is fairly straightforward, as for the =more= part, the benevolent sees benevolence, and the wise see wisdom.
+
+It was once joked that Emacs was an operating system disguised as an editor. This section will unveil the mystery of Emacs.
 
 ** Text editor
-No matter how Emacs fans deify it, Emacs is a text editor in the first place. Unlike VSCode, Emacs is designed for pure keyboard operation. This design ensures higher efficiency. At the same time, this has become a barrier for beginners to get started, and it takes some time to adapt.
+No matter how Emacs fans deify it, Emacs is a text editor in the first place. Unlike VSCode, Emacs is primarily designed for use [[https://www.gnu.org/software/emacs/manual/html_node/emacs/User-Input.html][with the keyboard]]. While it is possible to use the mouse to issue editing commands through the menu bar and tool bar, that is not as efficient as using the keyboard.
 
-As far as text editing is concerned, Emacs provides a lot of thoughtful functions. Here are two things:
+As far as text editing is concerned, Emacs provides a lot of practical functions. I will give two examples in this section.
 
 *** Backup
-As a mature programmer, you need to be aware of backups at all times. After all, mistakes are inevitable. In Emacs, there are mainly two backup methods, called [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html][static backup]] and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Auto_002dSaving.html#Auto_002dSaving][auto saving]] here.
+As a mature programmer, you need to be aware of backups at all times. After all, mistakes are inevitable.
 
-- Static backup occurs when you first open the file, the end of the backup file name has =~= labeled; and support multiple versions of backup
-- Automatic backup As the name suggests, periodically save the current file being edited, the file name of the head and tail have =#= marked. When saving, the automatically backed up files will be deleted, and when Emacs crashes due to unexpected reasons (such as a crash), the files will be retained, and you can use the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Recover.html][recover-this-file]] command to restore.
+In Emacs, there are mainly two backup methods, called [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Backup-Files.html][backups]] and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Auto_002dSaving.html#Auto_002dSaving][auto-saving]]:
+- Backups occurs when you first open the file, the end of the backup file name has =~= labeled; and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Numbered-Backups.html#Numbered-Backups][multiple-version]] backup is support
+- Auto-saving periodically save the current file being edited, the file name of the head and tail have =#= labeled. When saving, the auto-saving files will be deleted, and when Emacs crashes due to unexpected reasons (such as system crash), the files will be retained, and you can use the [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Recover.html][recover-this-file]] command to restore.
 
 #+begin_src
-Statically backed up files
+Backedups
 !Users!liujiacai!.emacs.d!README.org.~ 1 ~
 !Users!liujiacai!.emacs.d!README.org.~ 2 ~
 !Users!liujiacai!.emacs.d!customizations! editing.el.~ 1 ~*
@@ -53,13 +56,13 @@ Statically backed up files
 !Users!liujiacai!.emacs.d!customizations!editing.el.~ 47 ~*
 !Users!liujiacai!.emacs.d!customizations! editing.el.~ 48 ~*
 
-Automatically backed up files
+Auto-saving
 #!Users!liujiacai!.emacs.d!customizations!misc.org#
 #!Users!liujiacai!.emacs.d!customizations!navigation.el#*
 #!Users!liujiacai!.emacs.d! elpa!lsp-java- 20201105.1758 !lsp-java.el#
 #!Users!liujiacai!.emacs.d!init.el#
 #+end_src
-The above is part of the backup file in my computer. Thanks to these two functions, I have been rescued from the edge of a crash many times.
+The above show part of the backup files in my computer. Thanks to these two functions, I have been rescued from the edge of a crash many times.
 
 *** Undo/Redo
 When editing the file, [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Undo.html][undo]] and redo is a very basic, important feature. In conventional editor operations are linear, whereas in Emacs with the help of [[https://www.emacswiki.org/emacs/UndoTree][undo-tree]], it can be a tree. I will illustrate the difference between the two using state diagram below:
@@ -147,20 +150,16 @@ It is very confusing when I first encountered tree-based undo, but fortunately [
 
 ** Expansion and customization
 #+begin_quote
-At its core is an interpreter for Emacs Lisp, a dialect of the Lisp programming language with
-extensions to support text editing.
+At its core is an interpreter for Emacs Lisp, a dialect of the Lisp programming language with extensions to support text editing.
 #+end_quote
 
 The above section introduced two very useful basic functions in text editing. In fact, this is just the tip of the iceberg. Emacs's extensible and customizable features empower a creative community with countless powerful extensions. Readers may wonder, VSCode also has a rich extension market, so how is Emacs different from it? This is related to the Emacs [[https://www.gnu.org/software/emacs/emacs-paper.html#SEC14][design architecture]].
 
-Emacs itself can be regarded as a virtual machine(Lisp Machine). Except for the IO operations that interact with the operating system, which is implemented in C language, the rest are implemented by ELisp, and an interpreter is provided to run these ELisp codes.
-Each character input is equivalent to calling the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Commands-for-Insertion.html][self-insert-command]] command in the REPL of the interpreter , which means that the code defined by the user is equal to the Emacs source code (ELisp part).
+Emacs itself can be regarded as a virtual machine(Lisp Machine). Except for the IO operations that interact with the operating system, which is implemented in C language, the rest are all implemented in ELisp, and an interpreter is provided to run these ELisp codes.
 
-If the reader is not familiar with Lisp, so to analogy, open Emacs corresponds to type =python= in terminal, keyboard input, mouse click corresponds are all function call.
+User's input is equivalent to calling the [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Commands-for-Insertion.html][self-insert-command]] command in the REPL of the interpreter, which means that the code defined by the user is equal to the Emacs source code (ELisp part).
 
-One of the advantages of Lisp REPL is that it can dynamically change the internal state of the program. For example, if a variable such as =foo= is defined in Emacs source code, the function written by the user can directly modify it. For those who do not know Lisp, this is very incredible thing, but it is.
-
-This advantage of dynamically change state of running program is easy to extend, such as
+With interpreter of Elisp, extension development can be really easy.
 
 #+begin_src emacs lisp
 (defun my/google-search ()
@@ -173,24 +172,20 @@ This advantage of dynamically change state of running program is easy to extend,
         (buffer-substring (region-beginning) (region-end))
       (read-string "Google: ")))))
 #+end_src
-Put the few lines of code above to =init.el=, We add a useful function to open a browser in Emacs, and do google search.
+Put the few lines of code above to =init.el=, We can do google search in Emacs!
 
 In VSCode, even a Hello World level extension, the steps are much more complicated, concrete step please refer to:
 - https://code.visualstudio.com/api/get-started/your-first-extension
 
-In addition to the ease of extension, another advantage of ELisp REPL is that it is highly customizable. All ELisp implementation can be modified. For example, the picture below is the Emacs standard interface
+Another advantage of having a LISP interpreter in Emacs is that all elisp-based implementations can be modified by users. For example, if a variable such as =foo= is defined in source code of Emacs, the function written by the user can directly modify it. For those who do not know Lisp, this is very incredible thing, but it indeed can.
 
-[[https://www.gnu.org/software/emacs/images/teaser.png]]
-
-Most Emacs users hide the menu bar with such a line of code ~(menu-bar-mode -1)~, because menu is basically not used and takes up space.
-
-In addition, Emacs can also be used to [[https://www.emacswiki.org/emacs/MusicPlayers][listen to music]] , [[https://www.emacswiki.org/emacs/CategoryGames][play games]] , [[https://depp.brause.cc/nov.el/][read EPUB e-books]] , [[https://github.com/zevlg/telega.el][chat Telegram]] , and even [[https://github.com/manateelazycat/emacs-application-framework][any application]] can run in Emacs!
+There are many wonderful extensions exploring the power of Emacs, such as [[https://www.emacswiki.org/emacs/MusicPlayers][listen to music]] , [[https://www.emacswiki.org/emacs/CategoryGames][play games]] , [[https://depp.brause.cc/nov.el/][read EPUB e-books]] , [[https://github.com/zevlg/telega.el][chat Telegram]], and even [[https://github.com/manateelazycat/emacs-application-framework][any application]] can run in Emacs!
 
 #+begin_quote
 Emacs, “a great operating system, lacking only a decent editor”
 #+end_quote
 
-#+CAPTION: Listen music in Emacs
+#+CAPTION: Listen to music in Emacs
 [[https://img.alicdn.com/imgextra/i1/581166664/O1CN01PiBSo01z6A1VA2Lvt_!!581166664.png]]
 #+CAPTION: Play Tetris in Emacs
 [[https://img.alicdn.com/imgextra/i2/581166664/O1CN012SFAW41z6A1WeRU9M_!!581166664.png]]
@@ -202,7 +197,7 @@ Emacs, “a great operating system, lacking only a decent editor”
 [[https://img.alicdn.com/imgextra/i1/581166664/O1CN01vpjexS1z6A1PICqIh_!!581166664.gif]]
 
 ** Free/Libre
-When it comes to Emacs, the person I have to mention is Richard Stallman. There were many versions of Emacs in the early days, but now GNU Emacs has basically unified the world.
+When it comes to Emacs, the person I have to mention is Richard Stallman. There are many versions of Emacs in the early days, but now GNU Emacs has basically unified the world.
 #+CAPTION: Richard Stallman
 [[https://img.alicdn.com/imgextra/i2/581166664/O1CN01VH3Txp1z6A1WcQQ05_!!581166664.jpg]]
 
@@ -218,7 +213,7 @@ More Emacs Hackers can refer to:
 
 * Getting Started
 ** Experience and suggestions
-I came into Emacs because I learned Clojure. As a Lisp, Emacs is undoubtedly the best editor. However, vanilla Emacs is bloated but somehow surprisingly bare, I made many attempts before I felt comfortable with it. It is Emacs tutorial on [[https://www.braveclojure.com/basic-emacs/][braveclojure]] help me overcome the hard days, I use the [[https://github.com/flyingmachine/emacs-for-clojure][emacs-for-clojure]] configuration as the basis, and I force myself to code in Emacs as much as possible out of my love for Lisp.
+I come into Emacs because I learned Clojure. As a Lisp, Emacs is undoubtedly the best editor. However, vanilla Emacs is bloated but somehow surprisingly bare, I make many attempts before I fell comfortable with it. It is Emacs tutorial on [[https://www.braveclojure.com/basic-emacs/][braveclojure]] helps me overcome the hard days, I use [[https://github.com/flyingmachine/emacs-for-clojure][emacs-for-clojure]] configuration as the basis, and I force myself to code in Emacs as much as possible.
 
 It took about a month or two to get through the most difficult period of adaptation. Up to now, [[https://github.com/jiacai2050/dotfiles/tree/master/.emacs.d][my configuration file]] has been enriched a lot, and there are many functions written by myself. Before learning a new language, the relevant Emacs extensions will be configured first, so that everything can be done in Emacs. Here I want to emphasize one point:
 
@@ -228,13 +223,15 @@ In terms of a single function, Emacs may not be the best, but how to organically
 
 Here are some suggestions based on my own experience after using Emacs for 4 years:
 
-- Find a mature configuration and use Emacs first. You don't have to worry about the details at first. Spacemacs and Doom Emacs are the two most popular in the community. It is recommended that beginners try both to find the most suitable for them.
+- To deal with the discoverability problem, find a mature configuration instead of configuring all by yourself. You don't have to worry about the details at first. Spacemacs and Doom Emacs are the two most popular in the community. It is recommended that beginners try both to find the most suitable for them.
 - Find a month to focus on familiarizing with Emacs. Don't use it intermittently, otherwise it will be difficult to adapt to it. Once this month has passed, there will be unlimited "spring breeze".
 - When various extensions cannot meet your needs and have bugs (I'm in this status probably after two to three years), learn ELisp. After all, this is its essence. Recommend resources: [[http://ergoemacs.org/emacs/emacs.html][Practical Emacs Tutorial]] by Xah Lee and [[https://learnxinyminutes.com/docs/elisp/][Learn X in Y minutes]]
 - Make good use =C-h i=, the documentation that comes with Emacs, especially [[https://www.gnu.org/software/emacs/manual/html_node/efaq/Learning-how-to-do-something.html][do I find out how to do something in Emacs?]]
 - As of the beginning of 2020/November, I use Emacs to pursue the "authentic" and try to use Emacs's own shortcut keys (=C-x C-s=). Although my little finger started to hurt a year ago, I mapped the CAPS key to Ctrl at that time to overcome this. Problem still remains but I'm this mode for about one more year.
 
-  Although the community recommends the use of [[https://github.com/emacs-evil/evil][evil]] to solve this problem, I thought it was not "loyal" enough, and never used it. Until recently I discovered the [[https://www.gnu.org/software/emacs/manual/html_mono/viper.html][viper mode]] and realized the naivety of this idea, Emacs's core idea is that you can customize it according to your own needs, there is no so-called standard answer. Emacs will absorb the advantages of other editors. So I immediately configured the evil and completely liberated my little finger. After more than four years, I can still learn some life experience from Emacs. It is estimated that this is not possible with other software. This also prompted me to write this article to prevent beginners from falling into this kind of thinking.
+  Although the community recommends the use of [[https://github.com/emacs-evil/evil][evil]] to solve this problem, I thought it isn't "loyal" enough, and never use it. Until recently I discover the [[https://www.gnu.org/software/emacs/manual/html_mono/viper.html][viper mode]] and realize the naivety of this idea, Emacs's core concept is that you can customize it according to your own needs, there is no so-called standard answer. So I immediately install evil and completely liberated my little finger.
+
+  After more than four years, I can still learn some life experience from Emacs. It is estimated that this is not possible with other software. This also prompted me to write this article to prevent beginners from falling into this kind of thinking.
 
 Of course, everyone's learning path is different. Readers can adjust according to their own situation.
 
@@ -250,7 +247,6 @@ At present, I use org-mode relatively simply, just use it as markdown at the tim
 One thing I demo here is table support with org-mode. You can use the ~org-table-transpose-table-at-point~ command to transpose row and column of a table.
 
 [[https://img.alicdn.com/imgextra/i1/581166664/O1CN01VDVZEM1z6A1UOtSm0_!!581166664.gif]]
-
 
 *** Magit
 
@@ -278,7 +274,6 @@ C-a C-SPC Cu 6 Cn C -e Mw
 #+begin_quote
 The best editor is neither Emacs nor Vim, it's Emacs with Vim binding!
 #+end_quote
-
 
 *** Dired
 
@@ -332,7 +327,7 @@ In addition to the extensions introduced above, there are some more "small" exte
 - =multiple-cursors=
 [[https://img.alicdn.com/imgextra/i4/581166664/O1CN01ceUOar1z6A1OW1MMp_!!581166664.gif]]
 
-- =ace-jump-mode= moves the cursor quickly according to the character. The figure below is an example of fast jump according to p
+- =ace-jump-mode= moves the cursor quickly according to the first character. The figure below is an example of fast jump according to p
 [[https://img.alicdn.com/imgextra/i1/581166664/O1CN019sHvUm1z6A1R9QtHn_!!581166664.gif]]
 
 - =yasnippet= template system, which simplifies input by defining abbreviations for code fragments
@@ -363,6 +358,8 @@ Your patient mastery of Emacs is well-rewarded. I assure you.
 #+end_quote
 
 That's all, Happy Emacs!
+
+Comments on [[https://lobste.rs/s/ptgott/everything_you_need_know_before_try_emacs][Lobste]] and [[https://www.reddit.com/r/emacs/comments/k37lan/everything_you_need_to_know_before_try_emacs/][Reddit]].
 
 [[https://img.alicdn.com/imgextra/i1/581166664/O1CN01bolPgY1z6A1VNlxl8_!!581166664.jpg]]
 
