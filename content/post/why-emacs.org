@@ -8,14 +8,14 @@
 
 When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has nearly [[https://www.zdnet.com/article/the-10-oldest-significant-open-source-programs/][forty years]] of history. However, many users abandon Emacs before comfort with it due to the steep learning curve. I understand their frustration, I also made many attempts before "skilled" in Emacs.
 
-After spend honey moon with Emacs for four years, I think I can share what I learn from Emacs and shed some light for newcomers. This article will be divided into two parts:
+After spend honey moon with Emacs for [[https://github.com/jiacai2050/dotfiles/commit/43e9b4a314cd6b5607b675edac7f5e8a3b29a80b][four years]], I think I can share what I learn from Emacs and shed some light for newcomers. This article will be divided into two parts:
 1. The first part will introduce core concept of Emacs. I think the reason why many beginners give up after simply trying is that they don’t understand its design concept. Emacs is so unique that there are a lot of discomforts when migrate from other editors.
 
   By understanding its concept, readers can judge whether Emacs is in line with their own taste and whether it is worth the effort to master it.
 
 2. The second part will give some specific suggestions to beginners who want to get started with Emacs. Some extensions I use daily will also be introduce since many users choose Emacs because of a certain function of a extension. Until now I'm still amazed at the power of Emacs because of the advanced usage of an extension.
 
-Although this article will use ELisp as an example, readers do not need ELisp knowledge and basic programming skills is enough. Secondly, this article compares the features of Emacs with VSCode which is the most popular editor now, and it is also valid to change to other editors(Sublime/Vim to name a few).
+Although this article will use ELisp, ELisp knowledge isn't required and basic programming skills are enough. Secondly, this article compares the features of Emacs with VSCode which is the most popular editor now, and it is also valid to change to other editors(Sublime/Vim to name a few).
 
 #+begin_quote
 Emacs is Emacs, VSCode/Vim/Sublime... is yet just another editor ---- [[https://news.ycombinator.com/item?id=18400204][Source]]
@@ -29,7 +29,7 @@ The official [[https://www.gnu.org/software/emacs/][GNU Emacs]] website introduc
 #+begin_quote
 An extensible, customizable, free/libre text editor — and more.
 #+end_quote
-The first part is fairly straightforward, as for the =more= part, the benevolent sees benevolence, and the wise see wisdom.
+The first part is fairly straightforward, as for the =more= part, the benevolent see benevolence, and the wise see wisdom.
 
 It was once joked that Emacs was an operating system disguised as an editor. This section will unveil the mystery of Emacs.
 
@@ -343,8 +343,7 @@ In addition to the extensions introduced above, there are some more "small" exte
 [[https://img.alicdn.com/imgextra/i3/581166664/O1CN01yHD9GD1z6A1Tmi66V_!!581166664.gif]]
  The above illustration shows how to find files in a project, switch between implementation and testing, and switch between different projects
 
-
-*  Conclusion
+* Conclusion
 Perhaps the popularity of Emacs is far less than VSCode, but this is not a bad thing. For example, free riders are not suitable for using Emacs. Let them in will only lower the overall level of the community; and Emacs is an open system, it will learn from excellent design in VSCode, Emacs and other editors are not mutually exclusive.
 
 There will alway be posts telling switch bewteen Emacs than other editors in the Internet, this kind of controversial topic will undoubtedly attract everyone’s attention, but don’t forget the free spirit of Emacs. The one that suits you is the best. There is no need to indulge in something.
@@ -359,11 +358,9 @@ Your patient mastery of Emacs is well-rewarded. I assure you.
 
 That's all, Happy Emacs!
 
-Comments on [[https://lobste.rs/s/ptgott/everything_you_need_know_before_try_emacs][Lobste]] and [[https://www.reddit.com/r/emacs/comments/k37lan/everything_you_need_to_know_before_try_emacs/][Reddit]].
+Discussion on [[https://lobste.rs/s/ptgott/everything_you_need_know_before_try_emacs][Lobste]] and [[https://www.reddit.com/r/emacs/comments/k37lan/everything_you_need_to_know_before_try_emacs/][Reddit]].
 
-[[https://img.alicdn.com/imgextra/i1/581166664/O1CN01bolPgY1z6A1VNlxl8_!!581166664.jpg]]
-
-* Reference
+* References
 - [[https://irreal.org/blog/?p=279][Emacs As A Lisp Machine]]
 - [[https://news.ycombinator.com/item?id=18398324][Ask HN: Is Visual Studio Code the Emacs of 21st century?]]
 - [[https://www.reddit.com/r/emacs/comments/flpzft/what_benefits_does_emacs_offer_over_vs_code/][What benefits does emacs offer over vs code]]
@@ -372,3 +369,5 @@ Comments on [[https://lobste.rs/s/ptgott/everything_you_need_know_before_try_ema
 - [[https://web.archive.org/web/20190430192029/https://m.facebook.com/notes/daniel-colascione/buttery-smooth-emacs/10155313440066102/][Buttery Smooth Emacs]]
 - https://batsov.com/articles/2011/11/19/why-emacs/
 - https://github.com/remacs/remacs#why-emacs
+
+[[https://img.alicdn.com/imgextra/i1/581166664/O1CN01bolPgY1z6A1VNlxl8_!!581166664.jpg]]
