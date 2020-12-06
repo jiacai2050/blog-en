@@ -38,6 +38,7 @@
 
 <link href="/sass/main.min.c7bc1becf36bcf6a9ebd25d2947e43a2eb745ddb0c9a32b43126fd7fa460c351.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/jiacai.css">
 
 
 <meta property="og:title" content="What you need to know before try Emacs" />
@@ -46,13 +47,13 @@
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://en.liujiacai.net/2020/11/29/why-emacs/" />
 <meta property="article:published_time" content="2020-11-29T09:06:19+08:00" />
-<meta property="article:modified_time" content="2020-12-01T00:22:10+08:00" />
+<meta property="article:modified_time" content="2020-12-06T16:11:49+08:00" />
 <meta itemprop="name" content="What you need to know before try Emacs">
 <meta itemprop="description" content="When it comes to Emacs, every programmer should have heard its name more or less. After all, Emacs has nearly forty years of history. However, many users abandon Emacs before comfort with it due to the steep learning curve. I understand their frustration, I also made many attempts before &#34;skilled&#34; in Emacs.
  After spend honey moon with Emacs for four years, I think I can share what I learn from Emacs and shed some light for newcomers.">
 <meta itemprop="datePublished" content="2020-11-29T09:06:19+08:00" />
-<meta itemprop="dateModified" content="2020-12-01T00:22:10+08:00" />
-<meta itemprop="wordCount" content="3044">
+<meta itemprop="dateModified" content="2020-12-06T16:11:49+08:00" />
+<meta itemprop="wordCount" content="3032">
 
 
 
@@ -128,7 +129,7 @@
       <div class="post-meta">
         <span class="post-time"> 2020-11-29 09:06 </span>
         
-          <span class="more-meta"> 3044 words </span>
+          <span class="more-meta"> 3032 words </span>
           <span class="more-meta"> 15 mins read </span>
         
       </div>
@@ -195,7 +196,7 @@ When it comes to Emacs, every programmer should have heard its name more or less
 After spend honey moon with Emacs for <a href="https://github.com/jiacai2050/dotfiles/commit/43e9b4a314cd6b5607b675edac7f5e8a3b29a80b">four years</a>, I think I can share what I learn from Emacs and shed some light for newcomers. This article will be divided into two parts:</p>
 <ol>
 <li>
-<p>The first part will introduce core concept of Emacs. I think the reason why many beginners give up after simply trying is that they don’t understand its design concept. Emacs is so unique that there are a lot of discomforts when migrate from other editors.</p>
+<p>The first part will introduce core concept of Emacs. I think the reason why many beginners give up after simply trying is that they don’t understand its design concept. Emacs is so unique that there are a lot of discomfort when migrate from other editors.</p>
 <p>
 By understanding its concept, readers can judge whether Emacs is in line with their own taste and whether it is worth the effort to master it.</p>
 </li>
@@ -268,7 +269,7 @@ In Emacs, there are mainly two backup methods, called <a href="https://www.gnu.o
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-text" data-lang="text">Backedups
+<pre class="chroma"><code class="language-text" data-lang="text">Backups
 !Users!liujiacai!.emacs.d!README.org.~ 1 ~
 !Users!liujiacai!.emacs.d!README.org.~ 2 ~
 !Users!liujiacai!.emacs.d!customizations! editing.el.~ 1 ~*
@@ -479,7 +480,7 @@ Undo/Redo
 <p>At this point, if we undo twice, conventional editor returns to initial state (no characters), but Emacs restore to second state (there are <code class="verbatim">a b</code> there).</p>
 </li>
 </ul>
-<p>It is very confusing when I first encountered tree-based undo, but fortunately <a href="https://www.emacswiki.org/emacs/UndoTree">undo-tree</a> privide <code>undo-tree-visualize</code> to visualize the undo state. The state diagram above is taken from its comments.</p>
+<p>It is very confusing when I first encountered tree-based undo, but fortunately <a href="https://www.emacswiki.org/emacs/UndoTree">undo-tree</a> provide <code>undo-tree-visualize</code> to visualize the undo state. The state diagram above is taken from its comments.</p>
 </div>
 </div>
 </div>
@@ -493,14 +494,19 @@ Expansion and customization
 <p>At its core is an interpreter for Emacs Lisp, a dialect of the Lisp programming language with extensions to support text editing.</p>
 </blockquote>
 <p>
-The above section introduced two very useful basic functions in text editing. In fact, this is just the tip of the iceberg. Emacs&#39;s extensible and customizable features empower a creative community with countless powerful extensions. Readers may wonder, VSCode also has a rich extension market, so how is Emacs different from it? This is related to the Emacs <a href="https://www.gnu.org/software/emacs/emacs-paper.html#SEC14">design architecture</a>.</p>
+The above section introduced two very useful basic functions in text editing. In fact, this is just the tip of the iceberg. Emacs&#39;s extensible and customizable features empower a creative community with countless powerful extensions. Readers may wonder, VSCode also has a rich extension market, so how is Emacs different from it? This is related to the <a href="https://www.gnu.org/software/emacs/emacs-paper.html#SEC14">design architecture</a> of Emacs.</p>
 <p>
-Emacs itself can be regarded as a virtual machine(Lisp Machine). Except for the IO operations that interact with the operating system, which is implemented in C language, the rest are all implemented in ELisp, and an interpreter is provided to run these ELisp codes.</p>
-<p>
-User&#39;s input is equivalent to calling the <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Commands-for-Insertion.html">self-insert-command</a> command in the REPL of the interpreter, which means that the code defined by the user is equal to the Emacs source code (ELisp part).</p>
-<p>
-With interpreter of Elisp, extension development can be really easy.</p>
-<div class="src src-emacs">
+Emacs itself can be regarded as a virtual machine(Lisp Machine). At the core of Emacs is a full-featured Lisp interpreter written in C. Only the most basic and low-level pieces of Emacs are written in C. The majority of Emacs is actually written in ELisp. All operations, both built-in and user-defined, are actually just function call within the interpreter. For example:</p>
+<ul>
+<li>
+<p>keystroke will call <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Commands-for-Insertion.html">self-insert-command</a>.</p>
+</li>
+<li>
+<p>mouse click will call <a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Mouse-Commands.html">mouse-set-point</a>.</p>
+</li>
+</ul>
+<p>So, in a sense, Emacs has an entire programming language built-in which you can use to customize, extend, and change its behavior. For example, if a variable such as <code class="verbatim">foo</code> is defined in source code of Emacs, the function written by the user can directly modify it. For those who do not know Lisp, this is very incredible, but it indeed can.</p>
+<div class="src src-elisp">
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre class="chroma"><code><span class="lnt">1
@@ -514,7 +520,7 @@ With interpreter of Elisp, extension development can be really easy.</p>
 </span><span class="lnt">9
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-emacs" data-lang="emacs"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my/google-search</span> <span class="p">()</span>
+<pre class="chroma"><code class="language-elisp" data-lang="elisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my/google-search</span> <span class="p">()</span>
   <span class="s">&#34;Googles a query or region if any.&#34;</span>
   <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
   <span class="p">(</span><span class="nv">browse-url</span>
@@ -526,17 +532,16 @@ With interpreter of Elisp, extension development can be really easy.</p>
 </div>
 </div>
 </div>
-<p>Put the few lines of code above to <code class="verbatim">init.el</code>, We can do google search in Emacs!</p>
 <p>
-In VSCode, even a Hello World level extension, the steps are much more complicated, concrete step please refer to:</p>
+Put the few lines of code above to <code class="verbatim">init.el</code>, We can do google search in Emacs!</p>
+<p>
+In VSCode, even a Hello World level extension, the steps are much more complicated, for whose who interested can refer to</p>
 <ul>
 <li>
 <p><a href="https://code.visualstudio.com/api/get-started/your-first-extension">https://code.visualstudio.com/api/get-started/your-first-extension</a></p>
 </li>
 </ul>
-<p>Another advantage of having a LISP interpreter in Emacs is that all elisp-based implementations can be modified by users. For example, if a variable such as <code class="verbatim">foo</code> is defined in source code of Emacs, the function written by the user can directly modify it. For those who do not know Lisp, this is very incredible thing, but it indeed can.</p>
-<p>
-There are many wonderful extensions exploring the power of Emacs, such as <a href="https://www.emacswiki.org/emacs/MusicPlayers">listen to music</a> , <a href="https://www.emacswiki.org/emacs/CategoryGames">play games</a> , <a href="https://depp.brause.cc/nov.el/">read EPUB e-books</a> , <a href="https://github.com/zevlg/telega.el">chat Telegram</a>, and even <a href="https://github.com/manateelazycat/emacs-application-framework">any application</a> can run in Emacs!</p>
+<p>There are many wonderful extensions exploring the power of Emacs, such as <a href="https://www.emacswiki.org/emacs/MusicPlayers">listen to music</a> , <a href="https://www.emacswiki.org/emacs/CategoryGames">play games</a> , <a href="https://depp.brause.cc/nov.el/">read EPUB e-books</a> , <a href="https://github.com/zevlg/telega.el">chat Telegram</a>, and even <a href="https://github.com/manateelazycat/emacs-application-framework">any application</a> can run in Emacs!</p>
 <blockquote>
 <p>Emacs, “a great operating system, lacking only a decent editor”</p>
 </blockquote>
@@ -619,7 +624,7 @@ It took about a month or two to get through the most difficult period of adaptat
 Here are some suggestions based on my own experience after using Emacs for 4 years:</p>
 <ul>
 <li>
-<p>To deal with the discoverability problem, find a mature configuration instead of configuring all by yourself. You don&#39;t have to worry about the details at first. Spacemacs and Doom Emacs are the two most popular in the community. It is recommended that beginners try both to find the most suitable for them.</p>
+<p>To deal with the <a href="https://www.masteringemacs.org/article/discoverel-discover-emacs-context-menus">discoverability problem</a>, find a mature configuration instead of configuring all by yourself. You don&#39;t have to worry about the details at first. Spacemacs and Doom Emacs are the most popular in the community. It is recommended that beginners try both to find which one is suitable for them.</p>
 </li>
 <li>
 <p>Find a month to focus on familiarizing with Emacs. Don&#39;t use it intermittently, otherwise it will be difficult to adapt to it. Once this month has passed, there will be unlimited &#34;spring breeze&#34;.</p>
@@ -633,7 +638,7 @@ Here are some suggestions based on my own experience after using Emacs for 4 yea
 <li>
 <p>As of the beginning of 2020/November, I use Emacs to pursue the &#34;authentic&#34; and try to use Emacs&#39;s own shortcut keys (<code class="verbatim">C-x C-s</code>). Although my little finger started to hurt a year ago, I mapped the CAPS key to Ctrl at that time to overcome this. Problem still remains but I&#39;m this mode for about one more year.</p>
 <p>
-Although the community recommends the use of <a href="https://github.com/emacs-evil/evil">evil</a> to solve this problem, I thought it isn&#39;t &#34;loyal&#34; enough, and never use it. Until recently I discover the <a href="https://www.gnu.org/software/emacs/manual/html_mono/viper.html">viper mode</a> and realize the naivety of this idea, Emacs&#39;s core concept is that you can customize it according to your own needs, there is no so-called standard answer. So I immediately install evil and completely liberated my little finger.</p>
+Although the community recommends the use of <a href="https://github.com/emacs-evil/evil">evil</a> to solve this problem, I thought it isn&#39;t &#34;loyal&#34; enough, and never use it. Until recently I discover the <a href="https://www.gnu.org/software/emacs/manual/html_mono/viper.html">viper mode</a> and realize how naive I&#39;m. Emacs&#39;s core concept is that you can customize it according to your own needs, there is no so-called standard answer. So I immediately install evil and completely liberated my little finger.</p>
 <p>
 After more than four years, I can still learn some life experience from Emacs. It is estimated that this is not possible with other software. This also prompted me to write this article to prevent beginners from falling into this kind of thinking.</p>
 </li>
@@ -657,7 +662,7 @@ Edit UML in org-mode
 </figcaption>
 </figure>
 <p>
-Org-mode is the main reason why many non-programmers choose Emacs. Simply put, it is a markdown-like markup language. Many users use it to take notes and manage GTD. With the help of Emacs&#39;s powerful expansion capabilities, programmers use it for <a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">literate programming</a>, and it deserves to be ranked first in the extension list. 🥇</p>
+Org-mode is the main reason why many non-programmers choose Emacs. Simply put, it is a markdown-like language. Many users use it to take notes and manage GTD. With the help of Emacs&#39;s powerful expansion capabilities, programmers use it for <a href="http://www.howardism.org/Technical/Emacs/literate-devops.html">literate programming</a>, and it deserves to be ranked first in the extension list. 🥇</p>
 <p>
 At present, I use org-mode relatively simply, just use it as markdown at the time. Just this point, coupled with the shortcut keys of Emacs, it has been a few blocks ahead from various editors.</p>
 <p>
@@ -798,7 +803,7 @@ Before the emergence of LSP , there was no unified framework to solve the basic 
 More
 </h4>
 <div id="outline-text-headline-16" class="outline-text-4">
-<p>In addition to the extensions introduced above, there are some more &#34;small&#34; extensions I use daily. Of course, the list can go on and on, readers can find out more by yourselve.</p>
+<p>In addition to the extensions introduced above, there are some more &#34;small&#34; extensions I use daily. Of course, the list can go on and on, readers can find out more by yourselves.</p>
 <ul>
 <li>
 <p><code class="verbatim">company</code> completion framework, can be used with lsp-mode</p>
@@ -855,7 +860,7 @@ Conclusion
 <div id="outline-text-headline-17" class="outline-text-2">
 <p>Perhaps the popularity of Emacs is far less than VSCode, but this is not a bad thing. For example, free riders are not suitable for using Emacs. Let them in will only lower the overall level of the community; and Emacs is an open system, it will learn from excellent design in VSCode, Emacs and other editors are not mutually exclusive.</p>
 <p>
-There will alway be posts telling switch bewteen Emacs than other editors in the Internet, this kind of controversial topic will undoubtedly attract everyone’s attention, but don’t forget the free spirit of Emacs. The one that suits you is the best. There is no need to indulge in something.</p>
+There will always be posts telling switch between Emacs than other editors in the Internet, this kind of controversial topic will undoubtedly attract everyone’s attention, but don’t forget the free spirit of Emacs. The one that suits you is the best. There is no need to indulge in something.</p>
 <p>
 After all, Emacs/VSCode are just tools. Solving practical problems is the most important thing. Of course, a comfortable <del>operating system</del> editor will make this boring process fun.</p>
 <p>
@@ -875,6 +880,9 @@ References
 </h2>
 <div id="outline-text-headline-18" class="outline-text-2">
 <ul>
+<li>
+<p><a href="https://tldp.org/HOWTO/Emacs-Beginner-HOWTO.html#toc3">Emacs Beginner&#39;s HOWTO</a></p>
+</li>
 <li>
 <p><a href="https://irreal.org/blog/?p=279">Emacs As A Lisp Machine</a></p>
 </li>
@@ -914,12 +922,15 @@ References
   <p class="copyright-item">
     <span class="item-title">LastMod</span>
     <span class="item-content">
-        2020-12-01 00:22
-        <a href="https://github.com/jiacai2050/blog-en/commit/892b3a2711d001bada48665d548637d4f94475ba" title="advise why-emacs with regard to comments">(892b3a2)</a>
+        2020-12-06 16:11
+        <a href="https://github.com/jiacai2050/blog-en/commit/16e73bbb2fc0259682af1950c13aa5e8e9ae0a71" title="add favicon, update about page">(16e73bb)</a>
     </span>
   </p>
   
-  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
 </div>
 <footer class="post-footer">
       <div class="post-tags">

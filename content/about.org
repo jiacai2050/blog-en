@@ -1,10 +1,15 @@
 #+TITLE: About ME
 #+DATE: 2020-11-29T09:06:19+08:00
 #+DRAFT: false
-#+TAGS[]:
-#+KEYWORDS[]:
-#+SLUG:
-#+SUMMARY:
 
-- https://about.me/liujiacai
-- [[https://liujiacai.net/][Chinese blog]]
+* About
+Hi, I'm Jiacai Liu, a developer from Hangzhou, China.
+
+I have written blog since 2014, but [[https://liujiacai.net/][in Chinese]]. In IT fields, it's no doubt English is the most widely used language, so I decide I should write in English after having been working for 6 years.
+
+This blog will talk about programming languages, databases, web development and Emacs.
+
+If you have any questions you can reach me via [[mailto:jiacai2050+blog@gmail.com][email]].
+
+* Colophon
+- 2020-11-29, First init. build website with hugo
