@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>How to maintain your Emacs configuration - KeepCoding</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="Jiacai Liu" /><meta name="description" content="For Emacs users, optimizing their configuration is a fun thing, and it is also the best way to learn Emacs. Newbies are suggested to copy/paste configuration, which is the fastest and most effective way to learn. However, the configuration usually becomes more complicated and a little messy if do copy/paste after one year or two, More knowledge is required to master Emacs.
+ This article will introduce my experience in optimizing configuration, including two part: How Emacs load package and suggestions to maintain a robust configuration." /><meta name="keywords" content="Emacs, Rust, Database, Clojure, Lisp" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.79.0 with theme even" />
+
+
+<link rel="canonical" href="https://en.liujiacai.net/2021/05/21/emacs-package/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+<link href="/sass/main.min.c7bc1becf36bcf6a9ebd25d2947e43a2eb745ddb0c9a32b43126fd7fa460c351.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+<link rel="stylesheet" href="/css/jiacai.css">
+
+
+<meta property="og:title" content="How to maintain your Emacs configuration" />
+<meta property="og:description" content="For Emacs users, optimizing their configuration is a fun thing, and it is also the best way to learn Emacs. Newbies are suggested to copy/paste configuration, which is the fastest and most effective way to learn. However, the configuration usually becomes more complicated and a little messy if do copy/paste after one year or two, More knowledge is required to master Emacs.
+ This article will introduce my experience in optimizing configuration, including two part: How Emacs load package and suggestions to maintain a robust configuration." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://en.liujiacai.net/2021/05/21/emacs-package/" />
+<meta property="article:published_time" content="2021-05-21T07:08:54+08:00" />
+<meta property="article:modified_time" content="2021-05-21T07:08:54+08:00" />
+<meta itemprop="name" content="How to maintain your Emacs configuration">
+<meta itemprop="description" content="For Emacs users, optimizing their configuration is a fun thing, and it is also the best way to learn Emacs. Newbies are suggested to copy/paste configuration, which is the fastest and most effective way to learn. However, the configuration usually becomes more complicated and a little messy if do copy/paste after one year or two, More knowledge is required to master Emacs.
+ This article will introduce my experience in optimizing configuration, including two part: How Emacs load package and suggestions to maintain a robust configuration.">
+<meta itemprop="datePublished" content="2021-05-21T07:08:54+08:00" />
+<meta itemprop="dateModified" content="2021-05-21T07:08:54+08:00" />
+<meta itemprop="wordCount" content="1336">
+
+
+
+<meta itemprop="keywords" content="emacs," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How to maintain your Emacs configuration"/>
+<meta name="twitter:description" content="For Emacs users, optimizing their configuration is a fun thing, and it is also the best way to learn Emacs. Newbies are suggested to copy/paste configuration, which is the fastest and most effective way to learn. However, the configuration usually becomes more complicated and a little messy if do copy/paste after one year or two, More knowledge is required to master Emacs.
+ This article will introduce my experience in optimizing configuration, including two part: How Emacs load package and suggestions to maintain a robust configuration."/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo">KeepCoding</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a><a href="/tags/">
+        <li class="mobile-menu-item">Tags</li>
+      </a><a href="/about/">
+        <li class="mobile-menu-item">About</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo">KeepCoding</a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/tags/">Tags</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/about/">About</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">How to maintain your Emacs configuration</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-05-21 07:08 </span>
+        
+          <span class="more-meta"> 1336 words </span>
+          <span class="more-meta"> 7 mins read </span>
+        
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content always-active">
+    <nav id="TableOfContents">
+<ul>
+<li><a href="#headline-1">Package.el issues</a>
+</li>
+<li><a href="#headline-2">How package works</a>
+<ul>
+<li><a href="#headline-3">Autoload</a>
+</li>
+<li><a href="#headline-4">Feature</a>
+</li>
+<li><a href="#headline-5">Load</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-6">Submodule to the rescue</a>
+<ul>
+<li><a href="#headline-7">use-package bootstrap</a>
+</li>
+<li><a href="#headline-8">Common Git commands</a>
+</li>
+</ul>
+</li>
+<li><a href="#headline-9">References</a>
+</li>
+</ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      
+<p>
+For Emacs users, optimizing their configuration is a fun thing, and it is also the best way to learn Emacs. Newbies are suggested to copy/paste configuration, which is the fastest and most effective way to learn. However, the configuration usually becomes more complicated and a little messy if do copy/paste after one year or two, More knowledge is required to master Emacs.</p>
+<p>
+This article will introduce my experience in optimizing configuration, including two part: How Emacs load package and suggestions to maintain a robust configuration.</p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+Package.el issues
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<p>It is no exaggeration to say that <a href="https://www.gnu.org/software/emacs/emacs-paper.html#SEC14">high extensibility</a> is the main reason why Emacs remains popular for decades. You can check how many packages you have installed through package.el with <code class="verbatim">(length package-alist)</code>. It&#39;s 137 for me.</p>
+<p>
+Although package.el provides a convenient way to install packages, it does not provide the function of version management. This is the most basic function of any package managers. My Emacs setup have been broken up many times because of package upgrades, which is very frustrating.</p>
+<p>
+The community has some solutions, such as <a href="https://github.com/raxod502/straight.el">straight</a> and <a href="https://github.com/emacscollective/borg">borg</a>, but in order to avoid introducing new problems and reduce the burden of learning, I currently do not adopt these tools. Instead, I use the submodule that comes with git to manage some heavily used packages (such as lsp-mode/magit), and do upgrade in spare time. If there is a problem with the upgrade, I can just go back to the previous commit, without having to worry about being interrupted.</p>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+How package works
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>For packages managed by package.el, users can use them without knowing how Emacs loads the packages, but when to manage them completely by ourselves, we need to understand these details.</p>
+<p>
+First let&#39;s clarify the definition of the package:</p>
+<blockquote>
+<p>A package is a collection of <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html">one</a> or <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html">more</a> ELisp files, and Emacs searches them in folders specified by <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Search.html">load-path</a> .</p>
+</blockquote>
+<p>
+Emacs provides two high-level interfaces to automatically load packages: <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Autoload.html">autoload</a> and <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Named-Features.html">feature</a>.</p>
+<div id="outline-container-headline-3" class="outline-3">
+<h3 id="headline-3">
+Autoload
+</h3>
+<div id="outline-text-headline-3" class="outline-text-3">
+<div class="src src-emacs-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nf">autoload</span> <span class="nv">filename</span> <span class="nv">docstring</span> <span class="nb">interactive</span> <span class="nv">type</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>The autoload function can declare on function or macro, its corresponding file is loaded when it is used for the first time.</p>
+<p>
+Generally, the autoload function is not used directly, users can write a &#34;magic&#34; comment in the source before the real definition. For packages installed along with Emacs, these comments do nothing on their own, but they serve as a guide for the command <code class="verbatim">update-file-autoloads</code>, which constructs calls to autoload and arranges to execute them when Emacs is built. For example, there is a <code class="verbatim">hello-world.el</code> in the my-mode folder:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;;###autoload</span>
+<span class="p">(</span><span class="nb">defun</span> <span class="nv">my-hello</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;hello world&#34;</span><span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>
+We can use commands below to generate its autoloads file:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nv">package-generate-autoloads</span> <span class="s">&#34;hello-world&#34;</span> <span class="s">&#34;~/my-mode&#34;</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>Then in the same directory, we get <code class="verbatim">hello-world-autoloads.el</code></p>
+<div class="src src-emacs-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="c1">;;; hello-world-autoloads.el --- automatically extracted autoloads</span>
+<span class="c1">;;</span>
+<span class="c1">;;; Code:</span>
+
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="p">(</span><span class="nf">directory-file-name</span>
+                      <span class="p">(</span><span class="nb">or</span> <span class="p">(</span><span class="nf">file-name-directory</span> <span class="err">#</span><span class="nv">$</span><span class="p">)</span> <span class="p">(</span><span class="nf">car</span> <span class="nv">load-path</span><span class="p">))))</span>
+
+
+<span class="c1">;;;### (autoloads nil &#34;hello-world&#34; &#34;hello-world.el&#34; (0 0 0 0))</span>
+<span class="c1">;;; Generated autoloads from hello-world.el</span>
+
+<span class="p">(</span><span class="nf">autoload</span> <span class="ss">&#39;my-hello</span> <span class="s">&#34;hello-world&#34;</span> <span class="no">nil</span> <span class="no">t</span> <span class="no">nil</span><span class="p">)</span>
+
+<span class="c1">;;;***</span>
+
+<span class="c1">;; Local Variables:</span>
+<span class="c1">;; version-control: never</span>
+<span class="c1">;; no-byte-compile: t</span>
+<span class="c1">;; no-update-autoloads: t</span>
+<span class="c1">;; coding: utf-8</span>
+<span class="c1">;; End:</span>
+<span class="c1">;;; hello-world-autoloads.el ends here</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>When we execute my-hello for the first time, Emacs will load <code class="verbatim">hello-world.el</code> automatically.</p>
+<p>
+It should be noted here that in order for Emacs to recognize the declaration of the <code class="verbatim">my-hello</code> function, it is necessary to load the <code class="verbatim">hello-world-autoloads.el</code> first. For packages managed by package.el, when package.el downloads the package, it will perform the following operating:</p>
+<ul>
+<li>
+<p>Resolve dependencies, recursive download</p>
+</li>
+<li>
+<p>Append the package directory to load-path</p>
+</li>
+<li>
+<p>Automatically generate autoloads file and load it</p>
+</li>
+</ul>
+<p>In this way, users can directly use the functions provided by the package. If manage package manually, we need to implement the above operations ourselves, which will be introduced later.</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+Feature
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<p>Feature is another mechanism provided by Emacs to automatically load ELisp files. Take an example:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-emacs-lisp" data-lang="emacs-lisp"><span class="p">(</span><span class="nb">defun</span> <span class="nv">my-hello</span> <span class="p">()</span>
+  <span class="p">(</span><span class="nb">interactive</span><span class="p">)</span>
+  <span class="p">(</span><span class="nf">message</span> <span class="s">&#34;hello world&#34;</span><span class="p">))</span>
+
+<span class="c1">;; feature should be same with filename</span>
+<span class="p">(</span><span class="nb">provide</span> <span class="ss">&#39;hello-world</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>The code above declare a feature called <code class="verbatim">hello-world</code>, in order to use <code class="verbatim">my-hello</code> we just need to <code class="verbatim">(require &#39;hello-world)</code>, since feature is the same with filename, Emacs know which file to load.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+Load
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<div class="src src-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">load</span> <span class="nv">filename</span> <span class="k">&amp;optional</span> <span class="nv">missing-ok</span> <span class="nv">nomessage</span> <span class="nv">nosuffix</span> <span class="nv">must-suffix</span><span class="p">)</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>Load is a relatively low-level API, autoloads and feature both call load to do its job.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+Submodule to the rescue
+</h2>
+<div id="outline-text-headline-6" class="outline-text-2">
+<p>When autoload is introduced above, we introduce some housekeeping when package.el downloads a package. Here is a review:</p>
+<ul>
+<li>
+<p>Resolve dependencies, recursive download</p>
+</li>
+<li>
+<p>Append the package directory to load-path</p>
+</li>
+<li>
+<p>Automatically generate autoloads file and load it</p>
+</li>
+</ul>
+<p>If manage package via submodule, it will only download the package itself. The above three steps need to be done by ourselves. I currently use <a href="https://github.com/jwiegley/use-package">use-package</a> to do this. Here is an example to introduce its usage:</p>
+<div class="src src-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nf">use-package</span> <span class="nv">lsp-mode</span>
+  <span class="c1">;; config load-path，lsp-mode is in ~/.emacs.d/vendor/lsp-mode</span>
+  <span class="ss">:load-path</span> <span class="p">(</span><span class="s">&#34;~/.emacs.d/vendor/lsp-mode&#34;</span> <span class="s">&#34;~/.emacs.d/vendor/lsp-mode/clients&#34;</span><span class="p">)</span>
+  <span class="ss">:init</span> <span class="p">(</span><span class="k">setq</span> <span class="nv">lsp-keymap-prefix</span> <span class="s">&#34;C-c l&#34;</span><span class="p">)</span>
+  <span class="c1">;; config mode  hook</span>
+  <span class="ss">:hook</span> <span class="p">((</span><span class="nv">go-mode</span> <span class="o">.</span> <span class="nv">lsp-deferred</span><span class="p">))</span>
+  <span class="c1">;; generate autoloads</span>
+  <span class="ss">:commands</span> <span class="p">(</span><span class="nv">lsp</span> <span class="nv">lsp-deferred</span><span class="p">)</span>
+  <span class="c1">;; config custom variables</span>
+  <span class="ss">:custom</span> <span class="p">((</span><span class="nv">lsp-log-io</span> <span class="no">nil</span><span class="p">))</span>
+  <span class="ss">:config</span>
+  <span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;lsp-modeline</span><span class="p">)</span>
+  <span class="p">(</span><span class="nb">push</span> <span class="s">&#34;[/\\\\]vendor$&#34;</span> <span class="nv">lsp-file-watch-ignored-directories</span><span class="p">)</span>
+  <span class="c1">;; config mode-map</span>
+  <span class="ss">:bind</span> <span class="p">(</span><span class="ss">:map</span> <span class="nv">lsp-mode-map</span>
+              <span class="p">(</span><span class="s">&#34;M-.&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-definition</span><span class="p">)</span>
+              <span class="p">(</span><span class="s">&#34;M-n&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-references</span><span class="p">)))</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>As you can see, the use-package macro is very concise and concise, it unifies the various configurations of packages. Highly recommended. we use <a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Expansion.html">macroexpand-1</a> to see how use-package is implemented,</p>
+<div class="src src-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="k">progn</span>
+  <span class="p">(</span><span class="nv">eval-and-compile</span>
+    <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&#34;~/.emacs.d/vendor/lsp-mode&#34;</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">eval-and-compile</span>
+    <span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;load-path</span> <span class="s">&#34;~/.emacs.d/vendor/lsp-mode/clients&#34;</span><span class="p">))</span>
+
+  <span class="p">(</span><span class="k">let</span>
+      <span class="p">((</span><span class="nv">custom--inhibit-theme-enable</span> <span class="no">nil</span><span class="p">))</span>
+    <span class="p">(</span><span class="nb">unless</span>
+        <span class="p">(</span><span class="nv">memq</span> <span class="ss">&#39;use-package</span> <span class="nv">custom-known-themes</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">deftheme</span> <span class="nf">use-package</span><span class="p">)</span>
+      <span class="p">(</span><span class="nv">enable-theme</span> <span class="ss">&#39;use-package</span><span class="p">)</span>
+      <span class="p">(</span><span class="k">setq</span> <span class="nv">custom-enabled-themes</span>
+            <span class="p">(</span><span class="nv">remq</span> <span class="ss">&#39;use-package</span> <span class="nv">custom-enabled-themes</span><span class="p">)))</span>
+    <span class="p">(</span><span class="nv">custom-theme-set-variables</span> <span class="ss">&#39;use-package</span>
+                                <span class="o">&#39;</span><span class="p">(</span><span class="nv">lsp-log-io</span> <span class="no">nil</span> <span class="no">nil</span> <span class="no">nil</span> <span class="s">&#34;Customized with use-package lsp-mode&#34;</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nb">unless</span>
+      <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;lsp-deferred</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">autoload</span> <span class="nf">#&#39;</span><span class="nv">lsp-deferred</span> <span class="s">&#34;lsp-mode&#34;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">unless</span>
+      <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;lsp-find-definition</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">autoload</span> <span class="nf">#&#39;</span><span class="nv">lsp-find-definition</span> <span class="s">&#34;lsp-mode&#34;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">unless</span>
+      <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;lsp-find-references</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">autoload</span> <span class="nf">#&#39;</span><span class="nv">lsp-find-references</span> <span class="s">&#34;lsp-mode&#34;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">unless</span>
+      <span class="p">(</span><span class="nf">fboundp</span> <span class="ss">&#39;lsp</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">autoload</span> <span class="nf">#&#39;</span><span class="nv">lsp</span> <span class="s">&#34;lsp-mode&#34;</span> <span class="no">nil</span> <span class="no">t</span><span class="p">))</span>
+  <span class="p">(</span><span class="nv">condition-case-unless-debug</span> <span class="nv">err</span>
+      <span class="p">(</span><span class="k">setq</span> <span class="nv">lsp-keymap-prefix</span> <span class="s">&#34;C-c l&#34;</span><span class="p">)</span>
+    <span class="p">(</span><span class="kt">error</span>
+     <span class="p">(</span><span class="nf">funcall</span> <span class="nv">use-package--warning139</span> <span class="ss">:init</span> <span class="nv">err</span><span class="p">)))</span>
+  <span class="p">(</span><span class="nv">eval-after-load</span> <span class="ss">&#39;lsp-mode</span>
+    <span class="o">&#39;</span><span class="p">(</span><span class="k">progn</span>
+       <span class="p">(</span><span class="nf">require</span> <span class="ss">&#39;lsp-modeline</span><span class="p">)</span>
+       <span class="p">(</span><span class="nb">push</span> <span class="s">&#34;[/\\\\]vendor$&#34;</span> <span class="nv">lsp-file-watch-ignored-directories</span><span class="p">)</span>
+       <span class="no">t</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">add-hook</span> <span class="ss">&#39;go-mode-hook</span> <span class="nf">#&#39;</span><span class="nv">lsp-deferred</span><span class="p">)</span>
+    <span class="p">(</span><span class="nv">bind-keys</span> <span class="ss">:package</span> <span class="nv">lsp-mode</span> <span class="ss">:map</span> <span class="nv">lsp-mode-map</span>
+      <span class="p">(</span><span class="s">&#34;M-.&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-definition</span><span class="p">)</span>
+      <span class="p">(</span><span class="s">&#34;M-n&#34;</span> <span class="o">.</span> <span class="nv">lsp-find-references</span><span class="p">))</span>
+    <span class="p">))</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>
+It is almost the same as the code we manually configured.</p>
+<p>
+Use-package only solve the complicated configuration problems, it does not resolve package dependencies, we need to explicitly download them one by one(we can check dependencies in   <code class="verbatim">Package-Requires</code> at the head of one package):</p>
+<div class="src src-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="c1">;; lsp-mode deps</span>
+<span class="p">(</span><span class="nf">use-package</span> <span class="nv">spinner</span>
+  <span class="ss">:defer</span> <span class="no">t</span><span class="p">)</span>
+<span class="p">(</span><span class="nf">use-package</span> <span class="nv">lv</span>
+  <span class="ss">:defer</span> <span class="no">t</span><span class="p">)</span>
+<span class="c1">;; ...</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>
+When use-package cannot find these dependencies in load-path, it will automatically use package.el to download them. My approach here is a compromise. For some lightweight packages, there is no need to use submodule.</p>
+<p>
+Readers may think that downloading dependencies this way is too cumbersome, but in fact dependencies of different packages are likely to be the same, such as <a href="https://github.com/magnars/dash.el">dash.el</a>, <a href="https://github.com/magnars/s.el">s.el</a>, <a href="https://github.com/rejeep/f.el">f.el</a> to name a few. So there are not many dependencies for manual management.</p>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+use-package bootstrap
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<div class="src src-lisp">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-lisp" data-lang="lisp"><span class="p">(</span><span class="nv">package-initialize</span><span class="p">)</span>
+<span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">not</span> <span class="nv">package-archive-contents</span><span class="p">)</span>
+  <span class="p">(</span><span class="nv">package-refresh-contents</span><span class="p">))</span>
+
+<span class="p">(</span><span class="nb">dolist</span> <span class="p">(</span><span class="nv">p</span> <span class="o">&#39;</span><span class="p">(</span><span class="nf">use-package</span><span class="p">))</span>
+  <span class="p">(</span><span class="nb">when</span> <span class="p">(</span><span class="nf">not</span> <span class="p">(</span><span class="nv">package-installed-p</span> <span class="nv">p</span><span class="p">))</span>
+    <span class="p">(</span><span class="nv">package-install</span> <span class="nv">p</span><span class="p">)))</span>
+
+<span class="p">(</span><span class="k">setq</span> <span class="nv">use-package-always-ensure</span> <span class="no">t</span>
+      <span class="nv">use-package-verbose</span> <span class="no">t</span><span class="p">)</span>
+
+<span class="c1">;; From now no, we can use use-package to config packages</span></code></pre></td></tr></table>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+Common Git commands
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<div class="src src-shell">
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell"><span class="c1"># only after sync, update .gitmodules manually will take effect</span>
+git submodule sync
+
+<span class="c1"># update with upstream latest commit</span>
+git submodule update --init --recursive --remote
+
+<span class="c1"># https://stackoverflow.com/a/18854453/2163429</span>
+<span class="c1"># discard changes, and reset to commit specified in .gitmodules</span>
+git submodule update --init</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<p>Magit can be used for adding and removing submodule. Press <code class="verbatim">o</code> in <code class="verbatim">magit-status-mode</code>.</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+References
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<ul>
+<li>
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/How-Programs-Do-Loading.html">16.1 How Programs Do Loading</a></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Libraries.html">27.8 Libraries of Lisp Code for Emacs</a></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html">40.1.1 Summary: Sequence of Actions at Startup</a></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/elisp/Packaging-Basics.html">41.1 Packaging Basics</a></p>
+</li>
+<li>
+<p><a href="https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html">48.3 Package Installation</a></p>
+</li>
+<li>
+<p><a href="https://emacs.stackexchange.com/questions/33783/file-name-directory-how-does-emacs-know-what-is">(file-name-directory #$): How does Emacs know what #$ is?</a></p>
+</li>
+</ul>
+</div>
+</div>
+
+    </div>
+
+    <div class="post-copyright">
+  <p class="copyright-item">
+    <span class="item-title">Author</span>
+    <span class="item-content">Jiacai Liu</span>
+  </p>
+  <p class="copyright-item">
+    <span class="item-title">LastMod</span>
+    <span class="item-content">
+        2021-05-21 07:08
+        
+    </span>
+  </p>
+  
+  <p class="copyright-item">
+    <span class="item-title">License</span>
+    <span class="item-content"><a rel="license noopener" href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">CC BY-NC-ND 4.0</a></span>
+  </p>
+</div>
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/emacs/">emacs</a>
+          </div>
+      <nav class="post-nav">
+        
+        <a class="next" href="/2020/11/29/why-emacs/">
+            <span class="next-text nav-default">What you need to know before try Emacs</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        <div id="disqus_thread"></div>
+    <script type="text/javascript">
+    (function() {
+      
+      
+      if (window.location.hostname === 'localhost') return;
+
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      var disqus_shortname = 'liujiacai';
+      dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+  
+
+  
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="mailto:jiacai2050&#43;blog@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="https://stackoverflow.com/users/2163429/jiacai-liu" class="iconfont icon-stack-overflow" title="stack-overflow"></a>
+      <a href="https://twitter.com/liujiacai" class="iconfont icon-twitter" title="twitter"></a>
+      <a href="https://github.com/jiacai2050" class="iconfont icon-github" title="github"></a>
+  <a href="https://en.liujiacai.net/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  
+
+  <span class="copyright-year">
+    &copy; 
+    2020 - 
+    2021<span class="heart"><i class="iconfont icon-heart"></i></span><span>Jiacai Liu</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c12618f9a600c40bd024996677e951e64d3487006775aeb22e200c990006c5c7.js"></script>
+
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-50745138-2', 'auto');
+	ga('set', 'anonymizeIp', true);
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+
+
+
+
+
+
+</body>
+</html>
