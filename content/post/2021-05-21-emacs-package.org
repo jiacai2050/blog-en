@@ -1,0 +1,226 @@
+#+TITLE: How to maintain your Emacs configuration
+#+DATE: 2021-05-21T07:08:54+08:00
+#+TAGS[]: emacs
+#+CATEGORIES[]:
+
+For Emacs users, optimizing their configuration is a fun thing, and it is also the best way to learn Emacs. Newbies are suggested to copy/paste configuration, which is the fastest and most effective way to learn. However, the configuration usually becomes more complicated and a little messy if do copy/paste after one year or two, More knowledge is required to master Emacs.
+
+This article will introduce my experience in optimizing configuration, including two part: How Emacs load package and suggestions to maintain a robust configuration.
+
+* Package.el issues
+It is no exaggeration to say that [[https://www.gnu.org/software/emacs/emacs-paper.html#SEC14][high extensibility]] is the main reason why Emacs remains popular for decades. You can check how many packages you have installed through package.el with =(length package-alist)=. It's 137 for me.
+
+Although package.el provides a convenient way to install packages, it does not provide the function of version management. This is the most basic function of any package managers. My Emacs setup have been broken up many times because of package upgrades, which is very frustrating.
+
+The community has some solutions, such as [[https://github.com/raxod502/straight.el][straight]] and [[https://github.com/emacscollective/borg][borg]], but in order to avoid introducing new problems and reduce the burden of learning, I currently do not adopt these tools. Instead, I use the submodule that comes with git to manage some heavily used packages (such as lsp-mode/magit), and do upgrade in spare time. If there is a problem with the upgrade, I can just go back to the previous commit, without having to worry about being interrupted.
+
+* How package works
+For packages managed by package.el, users can use them without knowing how Emacs loads the packages, but when to manage them completely by ourselves, we need to understand these details.
+
+First let's clarify the definition of the package:
+
+#+begin_quote
+A package is a collection of [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Simple-Packages.html][one]] or [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Multi_002dfile-Packages.html][more]] ELisp files, and Emacs searches them in folders specified by [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Library-Search.html][load-path]] .
+#+end_quote
+
+Emacs provides two high-level interfaces to automatically load packages: [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Autoload.html][autoload]] and [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Named-Features.html][feature]].
+
+** Autoload
+#+begin_src emacs-lisp
+(autoload filename docstring interactive type)
+#+end_src
+The autoload function can declare on function or macro, its corresponding file is loaded when it is used for the first time.
+
+Generally, the autoload function is not used directly, users can write a "magic" comment in the source before the real definition. For packages installed along with Emacs, these comments do nothing on their own, but they serve as a guide for the command =update-file-autoloads=, which constructs calls to autoload and arranges to execute them when Emacs is built. For example, there is a =hello-world.el= in the my-mode folder:
+
+#+begin_src emacs-lisp
+;;;###autoload
+(defun my-hello ()
+  (interactive)
+  (message "hello world"))
+#+end_src
+
+We can use commands below to generate its autoloads file:
+
+#+begin_src emacs-lisp
+(package-generate-autoloads "hello-world" "~/my-mode")
+#+end_src
+Then in the same directory, we get =hello-world-autoloads.el=
+
+#+begin_src emacs-lisp
+;;; hello-world-autoloads.el --- automatically extracted autoloads
+;;
+;;; Code:
+
+(add-to-list 'load-path (directory-file-name
+                      (or (file-name-directory #$) (car load-path))))
+
+
+;;;### (autoloads nil "hello-world" "hello-world.el" (0 0 0 0))
+;;; Generated autoloads from hello-world.el
+
+(autoload 'my-hello "hello-world" nil t nil)
+
+;;;***
+
+;; Local Variables:
+;; version-control: never
+;; no-byte-compile: t
+;; no-update-autoloads: t
+;; coding: utf-8
+;; End:
+;;; hello-world-autoloads.el ends here
+#+end_src
+When we execute my-hello for the first time, Emacs will load =hello-world.el= automatically.
+
+It should be noted here that in order for Emacs to recognize the declaration of the =my-hello= function, it is necessary to load the =hello-world-autoloads.el= first. For packages managed by package.el, when package.el downloads the package, it will perform the following operating:
+- Resolve dependencies, recursive download
+- Append the package directory to load-path
+- Automatically generate autoloads file and load it
+
+In this way, users can directly use the functions provided by the package. If manage package manually, we need to implement the above operations ourselves, which will be introduced later.
+
+** Feature
+Feature is another mechanism provided by Emacs to automatically load ELisp files. Take an example:
+
+#+begin_src emacs-lisp
+(defun my-hello ()
+  (interactive)
+  (message "hello world"))
+
+;; feature should be same with filename
+(provide 'hello-world)
+#+end_src
+The code above declare a feature called =hello-world=, in order to use =my-hello= we just need to =(require 'hello-world)=, since feature is the same with filename, Emacs know which file to load.
+** Load
+#+begin_src lisp
+(load filename &optional missing-ok nomessage nosuffix must-suffix)
+#+end_src
+Load is a relatively low-level API, autoloads and feature both call load to do its job.
+
+* Submodule to the rescue
+When autoload is introduced above, we introduce some housekeeping when package.el downloads a package. Here is a review:
+- Resolve dependencies, recursive download
+- Append the package directory to load-path
+- Automatically generate autoloads file and load it
+
+If manage package via submodule, it will only download the package itself. The above three steps need to be done by ourselves. I currently use [[https://github.com/jwiegley/use-package][use-package]] to do this. Here is an example to introduce its usage:
+
+#+begin_src lisp
+(use-package lsp-mode
+  ;; config load-path，lsp-mode is in ~/.emacs.d/vendor/lsp-mode
+  :load-path ("~/.emacs.d/vendor/lsp-mode" "~/.emacs.d/vendor/lsp-mode/clients")
+  :init (setq lsp-keymap-prefix "C-c l")
+  ;; config mode  hook
+  :hook ((go-mode . lsp-deferred))
+  ;; generate autoloads
+  :commands (lsp lsp-deferred)
+  ;; config custom variables
+  :custom ((lsp-log-io nil))
+  :config
+  (require 'lsp-modeline)
+  (push "[/\\\\]vendor$" lsp-file-watch-ignored-directories)
+  ;; config mode-map
+  :bind (:map lsp-mode-map
+              ("M-." . lsp-find-definition)
+              ("M-n" . lsp-find-references)))
+#+end_src
+As you can see, the use-package macro is very concise and concise, it unifies the various configurations of packages. Highly recommended. we use [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Expansion.html][macroexpand-1]] to see how use-package is implemented,
+
+#+begin_src lisp
+(progn
+  (eval-and-compile
+    (add-to-list 'load-path "~/.emacs.d/vendor/lsp-mode"))
+  (eval-and-compile
+    (add-to-list 'load-path "~/.emacs.d/vendor/lsp-mode/clients"))
+
+  (let
+      ((custom--inhibit-theme-enable nil))
+    (unless
+        (memq 'use-package custom-known-themes)
+      (deftheme use-package)
+      (enable-theme 'use-package)
+      (setq custom-enabled-themes
+            (remq 'use-package custom-enabled-themes)))
+    (custom-theme-set-variables 'use-package
+                                '(lsp-log-io nil nil nil "Customized with use-package lsp-mode")))
+  (unless
+      (fboundp 'lsp-deferred)
+    (autoload #'lsp-deferred "lsp-mode" nil t))
+  (unless
+      (fboundp 'lsp-find-definition)
+    (autoload #'lsp-find-definition "lsp-mode" nil t))
+  (unless
+      (fboundp 'lsp-find-references)
+    (autoload #'lsp-find-references "lsp-mode" nil t))
+  (unless
+      (fboundp 'lsp)
+    (autoload #'lsp "lsp-mode" nil t))
+  (condition-case-unless-debug err
+      (setq lsp-keymap-prefix "C-c l")
+    (error
+     (funcall use-package--warning139 :init err)))
+  (eval-after-load 'lsp-mode
+    '(progn
+       (require 'lsp-modeline)
+       (push "[/\\\\]vendor$" lsp-file-watch-ignored-directories)
+       t)
+    (add-hook 'go-mode-hook #'lsp-deferred)
+    (bind-keys :package lsp-mode :map lsp-mode-map
+      ("M-." . lsp-find-definition)
+      ("M-n" . lsp-find-references))
+    ))
+#+end_src
+
+It is almost the same as the code we manually configured.
+
+Use-package only solve the complicated configuration problems, it does not resolve package dependencies, we need to explicitly download them one by one(we can check dependencies in   =Package-Requires= at the head of one package):
+
+#+begin_src lisp
+;; lsp-mode deps
+(use-package spinner
+  :defer t)
+(use-package lv
+  :defer t)
+;; ...
+#+end_src
+
+When use-package cannot find these dependencies in load-path, it will automatically use package.el to download them. My approach here is a compromise. For some lightweight packages, there is no need to use submodule.
+
+Readers may think that downloading dependencies this way is too cumbersome, but in fact dependencies of different packages are likely to be the same, such as [[https://github.com/magnars/dash.el][dash.el]], [[https://github.com/magnars/s.el][s.el]], [[https://github.com/rejeep/f.el][f.el]] to name a few. So there are not many dependencies for manual management.
+** use-package bootstrap
+#+begin_src lisp
+(package-initialize)
+(when (not package-archive-contents)
+  (package-refresh-contents))
+
+(dolist (p '(use-package))
+  (when (not (package-installed-p p))
+    (package-install p)))
+
+(setq use-package-always-ensure t
+      use-package-verbose t)
+
+;; From now no, we can use use-package to config packages
+#+end_src
+** Common Git commands
+#+begin_src shell
+# only after sync, update .gitmodules manually will take effect
+git submodule sync
+
+# update with upstream latest commit
+git submodule update --init --recursive --remote
+
+# https://stackoverflow.com/a/18854453/2163429
+# discard changes, and reset to commit specified in .gitmodules
+git submodule update --init
+#+end_src
+Magit can be used for adding and removing submodule. Press =o= in =magit-status-mode=.
+
+* References
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/How-Programs-Do-Loading.html][16.1 How Programs Do Loading]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Lisp-Libraries.html][27.8 Libraries of Lisp Code for Emacs]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Startup-Summary.html][40.1.1 Summary: Sequence of Actions at Startup]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/elisp/Packaging-Basics.html][41.1 Packaging Basics]]
+- [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Package-Installation.html][48.3 Package Installation]]
+- [[https://emacs.stackexchange.com/questions/33783/file-name-directory-how-does-emacs-know-what-is][(file-name-directory #$): How does Emacs know what #$ is?]]
